@@ -9,5 +9,6 @@ namespace Igreja.Com.Dominio.Interface
     public interface InterfaceMembro : InterfaceBase<Membro>
     {
         List<Membro> GetAll();
+        Membro BuscarPorId(int Id);
     }
 }

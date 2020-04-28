@@ -25,19 +25,91 @@ namespace Igreja.Com.Web.Controllers
             this.userManager = userManager;
         }
 
-        // GET: Membros
         public ActionResult Index()
         {
-
             return View(interfaceMembro.List());
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Membro membro)
+        {
+            try
+            {
+                //validacoes 
+                //interfaceMembro.EhValido(membro);
+                //interfaceMembro.Existe(membro);
+                if (ModelState.IsValid)
+                {
+                    CADASTRARUSUARIO(membro);
+                    //
+                    membro.dateTime = DateTime.Now;
+                    interfaceMembro.Add(membro);
+                    return RedirectToAction("Index");
+                }
+                return View(membro);
+                
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Membros/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var membro = interfaceMembro.BuscarPorId(id);
+            return View(membro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Membro membro)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                interfaceMembro.Update(membro);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Membros/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Membros/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
         public ActionResult ResumoMembro()
         {
 
             return View(interfaceMembro.List());
         }
-        // GET: Membros/Details/5
         public ActionResult Details(int id)
         {
             return View();
@@ -100,10 +172,7 @@ namespace Igreja.Com.Web.Controllers
 
 
         // GET: Membros/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+    
 
         public ActionResult Criar()
         {
@@ -112,32 +181,6 @@ namespace Igreja.Com.Web.Controllers
 
             return View("ResumoMembro", membro);
         }
-        // POST: Membros/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Membro membro)
-        {
-            try
-            {
-                //validacoes 
-                interfaceMembro.EhValido(membro);
-                interfaceMembro.Existe(membro);
-
-                //usuario
-                CADASTRARUSUARIO(membro);
-                //
-                membro.dateTime = DateTime.Now;
-                interfaceMembro.Add(membro);
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public async Task CADASTRARUSUARIO(Membro membro)
         {
             var usuario = await userManager.GetUserAsync(this.User);
@@ -153,54 +196,6 @@ namespace Igreja.Com.Web.Controllers
             usuario.CEP = "76813-040";
 
             await userManager.UpdateAsync(usuario);
-        }
-
-
-        // GET: Membros/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var membro = interfaceMembro.GetEntityById(id);
-            return View(membro);
-        }
-
-        // POST: Membros/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Membro membro)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                interfaceMembro.Update(membro);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Membros/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Membros/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
