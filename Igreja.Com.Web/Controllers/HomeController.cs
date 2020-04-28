@@ -28,13 +28,16 @@ namespace Igreja.Com.Web.Controllers
             ViewBag.Membro = interfaceMembro.GetAll();
             return View();
         }
-        //[HttpGet("api/ListarMembros")]
-        //public async Task<JsonResult> ListarMembros() 
-        //{
-        //    return JsonResult(interfaceMembro.ListAsync());
-        
-        //}
 
+        public IActionResult User()
+        {
+            
+            return View();
+        }
+        public IActionResult Tabela()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

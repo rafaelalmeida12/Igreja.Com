@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Igreja.Com.Dominio.Servico
 {
-    public class ServicoProduto : InterfaceServicoMembro
+    public class ServicoMembro : InterfaceServicoMembro
     {
         InterfaceMembro _interfaceMembro;
 
-        public ServicoProduto(InterfaceMembro interfaceMembro)
+        public ServicoMembro(InterfaceMembro interfaceMembro)
         {
             interfaceMembro = _interfaceMembro;
         }

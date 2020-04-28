@@ -32,6 +32,11 @@ namespace Igreja.Com.Web.Controllers
             return View(interfaceMembro.List());
         }
 
+        public ActionResult ResumoMembro()
+        {
+
+            return View(interfaceMembro.List());
+        }
         // GET: Membros/Details/5
         public ActionResult Details(int id)
         {
@@ -39,56 +44,56 @@ namespace Igreja.Com.Web.Controllers
         }
         public ActionResult Teste()
         {
-            var resultado = 0;
-            List<int> digits = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                                              11, 12, 13, 14, 15, 16, 17, 18, 19,20};
-            var contasQuantidadePorThread = digits.Count() / 4;
+            //var resultado = 0;
+            //List<int> digits = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+            //                                  11, 12, 13, 14, 15, 16, 17, 18, 19,20};
+            //var contasQuantidadePorThread = digits.Count() / 4;
 
-            var contas_parte1 = digits.Take(contasQuantidadePorThread);
-            var contas_parte2 = digits.Skip(contasQuantidadePorThread).Take(contasQuantidadePorThread);
-            var contas_parte3 = digits.Skip(contasQuantidadePorThread * 2).Take(contasQuantidadePorThread);
-            var contas_parte4 = digits.Skip(contasQuantidadePorThread * 3);
-            var inico = DateTime.Now;
+            //var contas_parte1 = digits.Take(contasQuantidadePorThread);
+            //var contas_parte2 = digits.Skip(contasQuantidadePorThread).Take(contasQuantidadePorThread);
+            //var contas_parte3 = digits.Skip(contasQuantidadePorThread * 2).Take(contasQuantidadePorThread);
+            //var contas_parte4 = digits.Skip(contasQuantidadePorThread * 3);
+            //var inico = DateTime.Now;
 
-            Thread thread_parte1 = new Thread(() =>
-            {
-                foreach (var item in contas_parte1)
-                {
-                    interfaceMembro.List();
-                    var soma = item + 1;
-                    soma = soma / 2;
-                    resultado = soma;
-                    foreach (var items in contas_parte2)
-                    {
-                        interfaceMembro.List();
-                        var numero = item - 1;
-                    }
-                }
-            });
-            Thread thread_parte2 = new Thread(() =>
-            {
-                foreach (var membro in contas_parte3)
-                {
-                    interfaceMembro.List();
-                    var numero = membro + 1;
-                }
-                foreach (var membro in contas_parte4)
-                {
-                    interfaceMembro.List();
-                    var numero = membro + 1;
-                }
-            });
-            thread_parte1.Start();
-            thread_parte2.Start();
+            //Thread thread_parte1 = new Thread(() =>
+            //{
+            //    foreach (var item in contas_parte1)
+            //    {
+            //        interfaceMembro.List();
+            //        var soma = item + 1;
+            //        soma = soma / 2;
+            //        resultado = soma;
+            //        foreach (var items in contas_parte2)
+            //        {
+            //            interfaceMembro.List();
+            //            var numero = item - 1;
+            //        }
+            //    }
+            //});
+            //Thread thread_parte2 = new Thread(() =>
+            //{
+            //    foreach (var membro in contas_parte3)
+            //    {
+            //        interfaceMembro.List();
+            //        var numero = membro + 1;
+            //    }
+            //    foreach (var membro in contas_parte4)
+            //    {
+            //        interfaceMembro.List();
+            //        var numero = membro + 1;
+            //    }
+            //});
+            //thread_parte1.Start();
+            //thread_parte2.Start();
 
-            while (thread_parte1.IsAlive || thread_parte2.IsAlive)
-            {
-                Thread.Sleep(105);
-                //Não vou fazer nada
-            }
+            //while (thread_parte1.IsAlive || thread_parte2.IsAlive)
+            //{
+            //    Thread.Sleep(105);
+            //    //Não vou fazer nada
+            //}
 
-            var fim = DateTime.Now;
-            ViewBag.resultato = fim - inico;
+            //var fim = DateTime.Now;
+            //ViewBag.resultato = fim - inico;
 
             return View();
         }

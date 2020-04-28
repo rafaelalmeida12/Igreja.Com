@@ -1,6 +1,8 @@
 using Igreja.Com.Aplicacao.EntidadesApp;
 using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Interface;
+using Igreja.Com.Dominio.InterfaceServico;
+using Igreja.Com.Dominio.Servico;
 using Igreja.Com.Infra.Configuracao;
 using Igreja.Com.Infra.Repositorio;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -44,6 +46,9 @@ namespace Igreja.Com.Web
             services.AddSingleton<InterfaceMembroApp, MembroApp>();
             services.AddSingleton<InterfaceCargoApp, CargoApp>();
             services.AddSingleton<InterfaceCultoApp, CultoApp>();
+
+            services.AddSingleton<InterfaceServicoMembro, ServicoMembro>();
+
             services.AddControllersWithViews();
         }
 
