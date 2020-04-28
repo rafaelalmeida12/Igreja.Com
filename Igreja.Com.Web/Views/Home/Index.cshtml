@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <h1>Membros Cadastrados:@ViewBag.Membro.Count</h1>
+    <h1>Membros Ativos:@ViewBag.Membro.Count</h1>
+    <h1>Membros Jovens:@ViewBag.Membro.Count</h1>
+    <h1>Membros Homens:@ViewBag.Membro.Count</h1>
+    <h1>Membros Mulheres:@ViewBag.Membro.Count</h1>
+</div>
+
+<div class="alert-dark">
+    @foreach (var item in ViewBag.Membro)
+    {
+        <table class="table">
+            <thead>
+                <tr>Aniversariantes do Mês:</tr>
+                @foreach (var itemd in ViewBag.Membro)
+                {
+                    <tr>
+                        <th>@itemd.Nome</th>
+                        <th>@itemd.DataNascimento.Month</th>
+                    </tr>
+                }
+            </thead>
+        </table>
+    }
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>Data Cadastro</tr>
+            @foreach (var item in ViewBag.Membro)
+            {
+                <tr>
+                    <th>@item.dateTime</th>
+                </tr>
+            }
+        </thead>
+    </table>
+</div>
