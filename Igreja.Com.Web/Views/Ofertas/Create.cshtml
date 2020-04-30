@@ -1,0 +1,44 @@
+﻿@model Igreja.Com.Dominio.Entidades.Oferta
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Cadastro de Ofertas</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Observacao" class="control-label"></label>
+                            <input asp-for="Observacao" class="form-control" />
+                            <span asp-validation-for="Observacao" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Valor" class="control-label"></label>
+                            <input asp-for="Valor" type="number" class="form-control" />
+                            <span asp-validation-for="Valor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DataCadastro" class="control-label"></label>
+                            <input asp-for="DataCadastro" type="date" class="form-control" />
+                            <span asp-validation-for="DataCadastro" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

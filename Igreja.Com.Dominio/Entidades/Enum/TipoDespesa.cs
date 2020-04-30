@@ -6,7 +6,8 @@ namespace Igreja.Com.Dominio.Entidades.Enum
 {
     public enum TipoDespesa
     {
-        Descricao
+
+        Doacao, Missionaria
     }
 }
 

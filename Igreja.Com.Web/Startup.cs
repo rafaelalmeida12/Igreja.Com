@@ -30,7 +30,7 @@ namespace Igreja.Com.Web
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddRazorPages();
 
             //Dominio & Repositorio
@@ -39,6 +39,8 @@ namespace Igreja.Com.Web
             services.AddSingleton<InterfaceMembro, RepositorioMembro>();
             services.AddSingleton<InterfaceCargo, RepositorioCargo>();
             services.AddSingleton<InterfaceCulto, RepositorioCulto>();
+            services.AddSingleton<InterfaceDespesa, RepositorioDespesa>();
+            services.AddSingleton<InterfaceOferta, RepositorioOferta>();
 
 
             //Aplicação & Aplicação
@@ -46,6 +48,8 @@ namespace Igreja.Com.Web
             services.AddSingleton<InterfaceMembroApp, MembroApp>();
             services.AddSingleton<InterfaceCargoApp, CargoApp>();
             services.AddSingleton<InterfaceCultoApp, CultoApp>();
+            services.AddSingleton<InterfaceDespesaApp, DespesaApp>();
+            services.AddSingleton<InterfaceOfertaApp, OfertaApp>();
 
             services.AddSingleton<InterfaceServicoMembro, ServicoMembro>();
 

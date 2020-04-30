@@ -1,0 +1,40 @@
+﻿@model Igreja.Com.Dominio.Entidades.Despesa
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Cadastro de Ofertas</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group bmd-form-group">
+                            <label asp-for="NumeroNotaFiscal" class="control-label"></label>
+                            <input asp-for="NumeroNotaFiscal" class="form-control" />
+                            <span asp-validation-for="NumeroNotaFiscal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <select asp-for="TipoDespesa" asp-items="Html.GetEnumSelectList<TipoDespesa>()" class="form-control"></select>
+                            <span asp-validation-for="TipoDespesa" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <label asp-for="Descricao" class="control-label"></label>
+                            <input asp-for="Descricao" class="form-control" />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <select asp-for="DestinoDespesa" asp-items="Html.GetEnumSelectList<TipoDestinoDespesa>()" class="form-control"></select>
+                            <span asp-validation-for="DestinoDespesa" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,14 +1,15 @@
-﻿@model IEnumerable<Igreja.Com.Dominio.Entidades.Culto>
+﻿@model IEnumerable<Igreja.Com.Dominio.Entidades.Despesa>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title ">Cultos</h4>
+                    <h4 class="card-title ">Despesas</h4>
                     <div class="row">
                         <p class="card-category">
-                            <a asp-action="Create" asp-controller="Culto">
-                                <i class="material-icons">add</i>Novo Culto
+                            <a asp-action="Create" asp-controller="Despesa">
+                                <i class="material-icons">add</i>Novo Despesa
                             </a>
                         </p>
                     </div>
@@ -20,11 +21,12 @@
                             <thead class="text-primary">
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nome)
+                                        @Html.DisplayNameFor(model => model.TipoDespesa)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Id)
+                                        @Html.DisplayNameFor(model => model.DestinoDespesa)
                                     </th>
+                                  
                                     <th>
                                         @Html.DisplayNameFor(model => model.dateTime)
                                     </th>
@@ -36,19 +38,19 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Nome)
+                                            @Html.DisplayFor(modelItem => item.TipoDespesa)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Id)
+                                            @Html.DisplayFor(modelItem => item.DestinoDespesa)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.dateTime)
                                         </td>
                                         <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar Culto" class="btn btn-primary btn-link btn-sm">
+                                            <button type="button" rel="tooltip" title="Editar Despesa" class="btn btn-primary btn-link btn-sm">
                                                 <a asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit</i>Editar  </a>
                                             </button>
-                                            <button type="button" rel="tooltip" title="Remove Culto" class="btn btn-danger btn-link btn-sm">
+                                            <button type="button" rel="tooltip" title="Remove Despesa" class="btn btn-danger btn-link btn-sm">
                                                 <i class="material-icons">close</i><a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
                                             </button>
                                         </td>
