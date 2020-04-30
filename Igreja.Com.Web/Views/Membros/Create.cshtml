@@ -12,7 +12,7 @@
                     <h4 class="card-title">Cadastro de Membros</h4>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Create">
+                    <form id="frmMembro" asp-action="Create">
                         <div class="row">
                             <div class="col-md-8">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -113,40 +113,39 @@
                         </div>
 
 
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group bmd-form-group">
-                                        <label asp-for="Endereco.Rua" class="bmd-label-floating"></label>
-                                        <input asp-for="Endereco.Rua" class="form-control" />
-                                        <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group bmd-form-group">
-                                        <label asp-for="Endereco.Numero" class="bmd-label-floating"></label>
-                                        <input asp-for="Endereco.Numero" class="form-control" />
-                                        <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
-                                    </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label asp-for="Endereco.Rua" class="bmd-label-floating"></label>
+                                    <input asp-for="Endereco.Rua" class="form-control" />
+                                    <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group bmd-form-group">
-                                        <label asp-for="Endereco.Bairro" class="bmd-label-floating"></label>
-                                        <input asp-for="Endereco.Bairro" class="form-control" />
-                                        <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group bmd-form-group">
-                                            <label asp-for="Endereco.Complemento" class="bmd-label-floating"></label>
-                                            <input asp-for="Endereco.Complemento" class="form-control" />
-                                            <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label asp-for="Endereco.Numero" class="bmd-label-floating"></label>
+                                    <input asp-for="Endereco.Numero" class="form-control" />
+                                    <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
                                 </div>
                             </div>
-                        </fieldset>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label asp-for="Endereco.Bairro" class="bmd-label-floating"></label>
+                                    <input asp-for="Endereco.Bairro" class="form-control" />
+                                    <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label asp-for="Endereco.Complemento" class="bmd-label-floating"></label>
+                                    <input asp-for="Endereco.Complemento" class="form-control" />
+                                    <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <input id="adicionarmembro" type="submit" value="Adicionar" class="btn btn-primary" />
                         </div>
