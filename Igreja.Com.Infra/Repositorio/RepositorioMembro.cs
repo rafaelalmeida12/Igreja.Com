@@ -26,5 +26,15 @@ namespace Igreja.Com.Infra.Repositorio
                     .ToList();
             }
         }
+        public Membro BuscarPorId(int Id)
+        {
+            using (var data = new Contexto(dbContextOptions))
+            {
+                return data.Membro
+                    .Include(c => c.Endereco)
+                    .Where(c => c.Id == Id)
+                    .FirstOrDefault();
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
         List<Membro> GetAll();
         bool Existe(Membro membro);
         Task EhValido(Membro membro);
+        Membro BuscarPorId(int Id);
     }
 }

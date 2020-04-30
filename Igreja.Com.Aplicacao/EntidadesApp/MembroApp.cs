@@ -62,6 +62,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         {
           return interfaceServico.Existe(membro);
         }
+
+        public Membro BuscarPorId(int Id)
+        {
+            return interfaceMembro.BuscarPorId(Id);
+        }
         #endregion
     }
 }
