@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
 using Igreja.Com.Web.Areas.Identity.Data;
+using Igreja.Com.Web.ViewsModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -17,12 +19,15 @@ namespace Igreja.Com.Web.Controllers
     public class MembrosController : Controller
     {
         private readonly InterfaceMembroApp interfaceMembro;
+        private readonly InterfaceCargoApp _interfaceCargos;
         private readonly UserManager<AppIdentityUser> userManager;
 
-        public MembrosController(InterfaceMembroApp interfaceMembro, UserManager<AppIdentityUser> userManager)
+        public MembrosController(InterfaceMembroApp interfaceMembro, UserManager<AppIdentityUser> userManager,
+            InterfaceCargoApp interfaceCargos)
         {
             this.interfaceMembro = interfaceMembro;
             this.userManager = userManager;
+            _interfaceCargos = interfaceCargos;
         }
 
         public ActionResult Index()
@@ -33,31 +38,40 @@ namespace Igreja.Com.Web.Controllers
         {
             return View();
         }
+        public ActionResult CriarParcial()
+        {
+            ViewBag.Cargo = new SelectList(_interfaceCargos.List(), "Id", "Descricao");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CriarParcial(MembroViewModel membroView)
+        {
+            if (ModelState.IsValid)
+            {
+                var membro = new Membro();
+                membro.Nome = membroView.NomeCompleto;
+                membro.Cargos = membroView.Cargos;
+                membro.DadosMinisteriais = membroView.DadosMinisteriais;
+                membro.DataNascimento = membroView.DataNascimento;
+                membro.Sexo = membroView.Sexo;
+                membro.Telefone = membroView.Telefone;
 
+                interfaceMembro.Add(membro);
+                return RedirectToAction("Index");
+            }
+            return View(membroView);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Membro membro)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //validacoes 
-                //interfaceMembro.EhValido(membro);
-                //interfaceMembro.Existe(membro);
-                if (ModelState.IsValid)
-                {
-                    CADASTRARUSUARIO(membro);
-                    //
-                    membro.dateTime = DateTime.Now;
-                    interfaceMembro.Add(membro);
-                    return RedirectToAction("Index");
-                }
-                return View(membro);
-                
+                membro.dateTime = DateTime.Now;
+                interfaceMembro.Add(membro);
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(membro);
         }
 
         // GET: Membros/Edit/5
@@ -172,7 +186,7 @@ namespace Igreja.Com.Web.Controllers
 
 
         // GET: Membros/Create
-    
+
 
         public ActionResult Criar()
         {

@@ -6,7 +6,7 @@ namespace Igreja.Com.Dominio.Entidades.Enum
 {
    public enum TipoBatizado
     {
-        Sim=1,
-        Nao=2
+        Sim,
+        Nao
     }
 }

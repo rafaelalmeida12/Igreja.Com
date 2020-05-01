@@ -1,0 +1,58 @@
+﻿@model Igreja.Com.Web.ViewsModels.MembroViewModel
+
+<h4>MembroViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriarParcial">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeCompleto" class="control-label"></label>
+                <input asp-for="NomeCompleto" class="form-control" />
+                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group bmd-form-group">
+                <select asp-for="EstadoCivil" class="form-control" asp-items="Html.GetEnumSelectList<TipoEstadoCivel>()">
+                    <option selected="selected" value="">Estado Civil</option>
+                </select>
+                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group bmd-form-group">
+                <select asp-for="Sexo" class="form-control" asp-items="Html.GetEnumSelectList<TipoSexo>()">
+                    <option selected="selected" value="">Sexo</option>
+                </select>
+                <span asp-validation-for="Sexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" type="date" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CargoId" class="control-label"></label>
+                <select asp-for="CargoId" asp-items="ViewBag.Cargo" class="form-control" >
+
+                </select>
+                <span asp-validation-for="CargoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Batizado</label>
+                <select asp-for="DadosMinisteriais.TipoBatizado" asp-items="Html.GetEnumSelectList<TipoBatizado>()" class="form-control">
+                    <option selected="selected" value="">Batizado</option>
+                </select>
+                <span asp-validation-for="DadosMinisteriais.TipoBatizado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

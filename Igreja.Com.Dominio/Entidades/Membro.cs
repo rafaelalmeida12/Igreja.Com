@@ -21,6 +21,7 @@ namespace Igreja.Com.Dominio.Entidades
         public string Curso { get; set; }
         public Endereco Endereco { get; set; }
         public DadosMinisteriais DadosMinisteriais { get; set; }
+        public IEnumerable<Cargo> Cargos { get; set; }
 
     }
 }
