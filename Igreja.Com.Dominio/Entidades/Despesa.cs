@@ -8,6 +8,7 @@ namespace Igreja.Com.Dominio.Entidades
    public class Despesa:Base
     {
         public string NumeroNotaFiscal { get; set; }
+        public decimal Valor { get; set; }
         public TipoDespesa TipoDespesa { get; set; }
         public string Descricao { get; set; }
         public TipoDestinoDespesa DestinoDespesa { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Igreja.Com.Aplicacao.InterfaceApp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,21 @@ namespace Igreja.Com.Web.Controllers
 {
     public class CaixaController : Controller
     {
-        // GET: Caixa
+        private readonly InterfaceOfertaApp _interfaceOfertaApp;
+        private readonly InterfaceDespesaApp _interfaceDespesaApp;
+        private readonly InterfaceCaixaApp _interfaceCaixaApp;
+        public CaixaController(InterfaceOfertaApp interfaceOfertaApp,
+            InterfaceDespesaApp interfaceDespesaApp, InterfaceCaixaApp interfaceCaixaApp)
+        {
+            _interfaceOfertaApp = interfaceOfertaApp;
+            _interfaceDespesaApp = interfaceDespesaApp;
+            _interfaceCaixaApp = interfaceCaixaApp;
+        }
         public ActionResult Index()
         {
+         ViewBag.Saldo= _interfaceOfertaApp.CalculaSaldo();
+         ViewBag.Despesa= _interfaceDespesaApp.CalculaSaldo();
+         ViewBag.Despesa= _interfaceCaixaApp.BuscarSaldo();
             return View();
         }
 

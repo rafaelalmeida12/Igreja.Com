@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Igreja.Com.Aplicacao.InterfaceApp
 {
-    public interface InterfaceDespesaApp : InterfaceBaseApp<Despesa>
+    public interface InterfaceCaixaApp : InterfaceBaseApp<Caixa>
     {
-        decimal CalculaSaldo();
+        decimal BuscarSaldo();
     }
 }

@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Igreja.Com.Aplicacao.InterfaceApp
 {
-    public interface InterfaceOfertaApp:InterfaceBaseApp<Oferta>
+    public interface InterfaceOfertaApp : InterfaceBaseApp<Oferta>
     {
+        decimal CalculaSaldo();
+        decimal DescontarDespesa(decimal valor);
     }
 }

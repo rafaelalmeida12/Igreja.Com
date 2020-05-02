@@ -3,36 +3,50 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <a asp-action="CriarParcial" asp-controller="Membros">
-            <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">content_copy</i>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a asp-action="CriarParcial" asp-controller="Membros">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <h3 class="card-title">
+                            Cadastro Rápido
+                        </h3>
                     </div>
-                    <h3 class="card-title">
-                        Cadastro Rápido
-                    </h3>
                 </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <a asp-action="Index" asp-controller="Membros">
-            <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">content_copy</i>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a asp-action="Create" asp-controller="Membros">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <h3 class="card-title">
+                            Cadastro Completo
+                        </h3>
                     </div>
-                    <h3 class="card-title">
-                        Cadastro Completo
-                    </h3>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <a asp-action="Create" asp-controller="Membros">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <h3 class="card-title">
+                            Aniversariantes
+                        </h3>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -60,10 +74,13 @@
                                         @Html.DisplayNameFor(model => model.Sexo)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.EstadoCivil)
+                                        @Html.DisplayNameFor(model => model.DadosMinisteriais.TipoBatizado)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Cpf)
+                                        @Html.DisplayNameFor(model => model.Telefone)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Cargos)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -71,29 +88,32 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Nome)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Sexo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.EstadoCivil)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Cpf)
-                                        </td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" title="Editar Membro" class="btn btn-primary btn-link btn-sm">
-                                                <a asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit</i>Editar  </a>
-                                            </button>
-                                            <button type="button" rel="tooltip" title="Remove Membro" class="btn btn-danger btn-link btn-sm">
-                                                <i class="material-icons">close</i><a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
-                                            </button>
-                                        </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sexo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DadosMinisteriais.TipoBatizado)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Telefone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cargos)
+                                    </td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" rel="tooltip" title="Editar Membro" class="btn btn-primary btn-link btn-sm">
+                                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="material-icons">edit</i>Editar  </a>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Remove Membro" class="btn btn-danger btn-link btn-sm">
+                                            <i class="material-icons">close</i><a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                                        </button>
+                                    </td>
 
-                                    </tr>
+                                </tr>
                                 }
                             </tbody>
                         </table>

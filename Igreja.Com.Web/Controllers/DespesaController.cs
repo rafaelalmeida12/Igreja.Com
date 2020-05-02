@@ -12,10 +12,15 @@ namespace Igreja.Com.Web.Controllers
     public class DespesaController : Controller
     {
         private readonly InterfaceDespesaApp _interfaceDespesaApp;
+        private readonly InterfaceOfertaApp _interfaceOfertaApp;
+        private readonly InterfaceCaixaApp _interfaceCaixaApp;
 
-        public DespesaController(InterfaceDespesaApp interfaceDespesaApp)
+        public DespesaController(InterfaceDespesaApp interfaceDespesaApp,
+            InterfaceOfertaApp interfaceOfertaApp, InterfaceCaixaApp interfaceCaixaApp)
         {
             _interfaceDespesaApp = interfaceDespesaApp;
+            _interfaceOfertaApp = interfaceOfertaApp;
+            _interfaceCaixaApp = interfaceCaixaApp;
         }
         // GET: Despesa
         public ActionResult Index()
@@ -38,13 +43,15 @@ namespace Igreja.Com.Web.Controllers
         // POST: Despesa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Despesa objeto)
+        public ActionResult Create(Despesa despesa)
         {
             try
             {
-                objeto.dateTime = DateTime.Now;
+                //subtrai do caixa
+              
 
-                _interfaceDespesaApp.Add(objeto);
+                despesa.dateTime = DateTime.Now;
+                _interfaceDespesaApp.Add(despesa);
                 return RedirectToAction(nameof(Index));
             }
             catch

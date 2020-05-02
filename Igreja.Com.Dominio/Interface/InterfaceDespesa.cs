@@ -7,5 +7,6 @@ namespace Igreja.Com.Dominio.Interface
 {
     public interface InterfaceDespesa : InterfaceBase<Despesa>
     {
+        decimal CalculaSaldo();
     }
 }

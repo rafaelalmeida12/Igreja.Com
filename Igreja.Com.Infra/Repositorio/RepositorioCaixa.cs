@@ -9,29 +9,18 @@ using System.Text;
 
 namespace Igreja.Com.Infra.Repositorio
 {
-    public class RepositorioOferta:RepositorioBase<Oferta>,InterfaceOferta
+    public class RepositorioCaixa : RepositorioBase<Caixa>, InterfaceCaixa
     {
         private readonly DbContextOptions<Contexto> dbContextOptions;
-        public RepositorioOferta()
+        public RepositorioCaixa()
         {
             dbContextOptions = new DbContextOptions<Contexto>();
         }
-
-        public decimal CalculaSaldo()
+        public decimal BuscarSaldo()
         {
             using (var busca = new Contexto(dbContextOptions))
             {
                 return busca.Oferta.Sum(m => m.Valor);
-            }
-        }
-
-        public decimal DescontarDespesa(decimal valor)
-        {
-            using (var busca = new Contexto(dbContextOptions))
-            {
-                var resultado= busca.Oferta.Sum(m => m.Valor);
-                var novoResultado= resultado - valor;
-                return novoResultado;
             }
         }
     }

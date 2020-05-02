@@ -23,6 +23,8 @@ namespace Igreja.Com.Infra.Repositorio
                 return busca.Membro
                     .AsNoTracking()
                     .Include(C=>C.Endereco)
+                    .Include(d=>d.DadosMinisteriais)
+                    .Include(d=>d.Cargos)
                     .ToList();
             }
         }

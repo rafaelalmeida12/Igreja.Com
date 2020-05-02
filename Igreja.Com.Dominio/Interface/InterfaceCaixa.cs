@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Igreja.Com.Dominio.Interface
 {
-    public interface InterfaceOferta:InterfaceBase<Oferta>
+    public interface InterfaceCaixa :InterfaceBase<Caixa>
     {
-        decimal CalculaSaldo();
-        decimal DescontarDespesa(decimal valor);
+        decimal BuscarSaldo();
     }
 }

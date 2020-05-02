@@ -32,7 +32,7 @@ namespace Igreja.Com.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(interfaceMembro.List());
+            return View(interfaceMembro.GetAll());
         }
         public ActionResult Create()
         {

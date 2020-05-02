@@ -14,10 +14,13 @@ namespace Igreja.Com.Web.Controllers
     public class OfertasController : Controller
     {
         private readonly InterfaceOfertaApp _interfaceOferta;
+        private readonly InterfaceCaixaApp _interfaceCaixaApp;
 
-        public OfertasController(InterfaceOfertaApp interfaceOferta)
+        public OfertasController(InterfaceOfertaApp interfaceOferta,
+            InterfaceCaixaApp interfaceCaixaApp)
         {
             _interfaceOferta = interfaceOferta;
+            _interfaceCaixaApp = interfaceCaixaApp;
         }
 
         // GET: Ofertas
@@ -54,10 +57,17 @@ namespace Igreja.Com.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Observacao,Valor,DataCadastro,Id,dateTime")] Oferta oferta)
+        public async Task<IActionResult> Create(Oferta oferta)
         {
             if (ModelState.IsValid)
             {
+                //adicionar valor no caixa
+                var caixa = new Caixa
+                {
+                    Saldo = oferta.Valor
+                };
+                _interfaceCaixaApp.Add(caixa);
+
                 oferta.dateTime = DateTime.Now;
                 _interfaceOferta.Add(oferta);
                 
