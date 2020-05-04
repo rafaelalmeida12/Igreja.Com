@@ -20,45 +20,37 @@ namespace Igreja.Com.Web.Controllers
             _InterfaceCargo = context;
         }
 
-        // GET: Cargoes
         public  IActionResult Index()
         {
             return View( _InterfaceCargo.List());
         }
 
-        // GET: Cargoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var cargo = _InterfaceCargo.GetEntityById(id.Value);
             if (cargo == null)
             {
                 return NotFound();
             }
-
             return View(cargo);
         }
 
-        // GET: Cargoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cargoes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Descricao,Id")] Cargo cargo)
+        public async Task<IActionResult> Create(Cargo cargo)
         {
             if (ModelState.IsValid)
             {
-                cargo.dateTime = DateTime.Now;
+               // cargo.dateTime = DateTime.Now;
                 _InterfaceCargo.Add(cargo);
                 return RedirectToAction(nameof(Index));
             }

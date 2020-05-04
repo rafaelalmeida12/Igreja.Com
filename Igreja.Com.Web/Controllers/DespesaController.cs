@@ -47,10 +47,8 @@ namespace Igreja.Com.Web.Controllers
         {
             try
             {
-                //subtrai do caixa
-              
-
-                despesa.dateTime = DateTime.Now;
+                var resultado = _interfaceCaixaApp.BuscarSaldoDoMes(despesa.dateTime);
+                
                 _interfaceDespesaApp.Add(despesa);
                 return RedirectToAction(nameof(Index));
             }

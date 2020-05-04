@@ -40,9 +40,6 @@ namespace Igreja.Com.Web.Controllers
             CarregarViewBags();
             return View();
         }
-
-     
-
         // POST: Dizimos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -50,7 +47,7 @@ namespace Igreja.Com.Web.Controllers
         {
             try
             {
-                objeto.dateTime = DateTime.Now;
+              //  objeto.dateTime = DateTime.Now;
                 interfaceDizimo.Add(objeto);
 
                 return RedirectToAction(nameof(Index));

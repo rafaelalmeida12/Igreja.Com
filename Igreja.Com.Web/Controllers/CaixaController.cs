@@ -22,9 +22,10 @@ namespace Igreja.Com.Web.Controllers
         }
         public ActionResult Index()
         {
-         ViewBag.Saldo= _interfaceOfertaApp.CalculaSaldo();
-         ViewBag.Despesa= _interfaceDespesaApp.CalculaSaldo();
-         ViewBag.Despesa= _interfaceCaixaApp.BuscarSaldo();
+            DateTime date = DateTime.Now;
+            ViewBag.Saldo = _interfaceOfertaApp.CalculaSaldo();
+            ViewBag.Despesa = _interfaceDespesaApp.CalculaSaldo();
+            ViewBag.Despesa = _interfaceCaixaApp.BuscarSaldoDoMes(date);
             return View();
         }
 
@@ -33,14 +34,10 @@ namespace Igreja.Com.Web.Controllers
         {
             return View();
         }
-
-        // GET: Caixa/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Caixa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -48,7 +45,6 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 // TODO: Add insert logic here
-
                 return RedirectToAction(nameof(Index));
             }
             catch

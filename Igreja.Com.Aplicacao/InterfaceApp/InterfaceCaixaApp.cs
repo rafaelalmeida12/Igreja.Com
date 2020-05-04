@@ -7,6 +7,7 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
 {
     public interface InterfaceCaixaApp : InterfaceBaseApp<Caixa>
     {
-        decimal BuscarSaldo();
+        Caixa BuscarSaldoDoMes(DateTime date);
+     
     }
 }

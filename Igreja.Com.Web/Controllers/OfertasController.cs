@@ -52,28 +52,41 @@ namespace Igreja.Com.Web.Controllers
             return View();
         }
 
-        // POST: Ofertas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Oferta oferta)
         {
             if (ModelState.IsValid)
             {
-                //adicionar valor no caixa
-                var caixa = new Caixa
-                {
-                    Saldo = oferta.Valor
-                };
-                _interfaceCaixaApp.Add(caixa);
+                AdicionarValorCaixa(oferta);
 
-                oferta.dateTime = DateTime.Now;
                 _interfaceOferta.Add(oferta);
-                
+
                 return RedirectToAction(nameof(Index));
             }
             return View(oferta);
+        }
+
+        private void AdicionarValorCaixa(Oferta oferta)
+        {
+            
+           var caixaDoMes= _interfaceCaixaApp.BuscarSaldoDoMes(oferta.dateTime);
+        
+            if (caixaDoMes==null)
+            {
+                var caixa = new Caixa
+                {
+                    Saldo = oferta.Valor,
+           
+                };
+                _interfaceCaixaApp.Add(caixa);
+            }
+            else
+            {
+                caixaDoMes.Saldo += oferta.Valor;
+                _interfaceCaixaApp.Update(caixaDoMes);
+            }
+            
         }
 
         // GET: Ofertas/Edit/5

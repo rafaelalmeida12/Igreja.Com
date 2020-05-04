@@ -7,6 +7,6 @@ namespace Igreja.Com.Dominio.Interface
 {
     public interface InterfaceCaixa :InterfaceBase<Caixa>
     {
-        decimal BuscarSaldo();
+        Caixa BuscarSaldoDoMes(DateTime date);
     }
 }

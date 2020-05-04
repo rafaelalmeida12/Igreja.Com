@@ -17,6 +17,7 @@ namespace Igreja.Com.Infra.Configuracao
         public DbSet<Culto> Culto { get; set; }
         public DbSet<Oferta> Oferta { get; set; }
         public DbSet<Despesa> Despesa { get; set; }
+        public DbSet<Caixa> Caixa { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

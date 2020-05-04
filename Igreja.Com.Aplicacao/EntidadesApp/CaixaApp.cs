@@ -1,6 +1,7 @@
 ﻿using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
 using Igreja.Com.Dominio.Interface;
+using System;
 using System.Collections.Generic;
 
 namespace Igreja.Com.Aplicacao.EntidadesApp
@@ -16,12 +17,17 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public void Add(Caixa Objeto)
         {
-            throw new System.NotImplementedException();
+            _interfaceCaixa.Add(Objeto);
         }
 
-        public decimal BuscarSaldo()
+        public Caixa BuscarSaldoDoMes(DateTime date)
         {
-            return _interfaceCaixa.BuscarSaldo();
+            return _interfaceCaixa.BuscarSaldoDoMes(date);
+        }
+
+        public decimal BuscarSaldoMes(DateTime dateTime)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(Caixa Objeto)

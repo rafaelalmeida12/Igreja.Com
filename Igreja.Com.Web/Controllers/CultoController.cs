@@ -46,7 +46,7 @@ namespace Igreja.Com.Web.Controllers
             try
             { 
 
-                culto.dateTime = DateTime.Now;
+                //culto.dateTime = DateTime.Now;
                 interfaceCulto.Add(culto);
                 return RedirectToAction(nameof(Index));
             }

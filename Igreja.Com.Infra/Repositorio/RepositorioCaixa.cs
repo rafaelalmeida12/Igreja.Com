@@ -16,12 +16,16 @@ namespace Igreja.Com.Infra.Repositorio
         {
             dbContextOptions = new DbContextOptions<Contexto>();
         }
-        public decimal BuscarSaldo()
+
+        public Caixa BuscarSaldoDoMes(DateTime date)
         {
             using (var busca = new Contexto(dbContextOptions))
             {
-                return busca.Oferta.Sum(m => m.Valor);
+                return busca.Caixa.Where(m => m.dateTime.Month==date.Month).FirstOrDefault();
             }
         }
     }
 }
+
+
+

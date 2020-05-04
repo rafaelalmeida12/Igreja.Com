@@ -67,7 +67,7 @@ namespace Igreja.Com.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                membro.dateTime = DateTime.Now;
+               // membro.dateTime = DateTime.Now;
                 interfaceMembro.Add(membro);
                 return RedirectToAction("Index");
             }
