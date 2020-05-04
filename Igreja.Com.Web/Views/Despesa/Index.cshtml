@@ -21,7 +21,7 @@
                             <thead class="text-primary">
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.TipoDespesa)
+                                        @Html.DisplayNameFor(model => model.categoriaDespesa.Descricao)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.DestinoDespesa)
@@ -38,7 +38,7 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TipoDespesa)
+                                            @Html.DisplayFor(modelItem => item.categoriaDespesa.Descricao)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.DestinoDespesa)

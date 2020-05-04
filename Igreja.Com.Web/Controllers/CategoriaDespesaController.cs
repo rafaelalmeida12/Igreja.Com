@@ -9,48 +9,41 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Igreja.Com.Web.Controllers
 {
-    public class DespesaController : Controller
+    public class CategoriaDespesaController : Controller
     {
-        private readonly InterfaceDespesaApp _interfaceDespesaApp;
-        private readonly InterfaceOfertaApp _interfaceOfertaApp;
-        private readonly InterfaceCaixaApp _interfaceCaixaApp;
+        private readonly InterfaceCategoriaDespesaApp _interfaceCategoriaDespesa;
 
-        public DespesaController(InterfaceDespesaApp interfaceDespesaApp,
-            InterfaceOfertaApp interfaceOfertaApp, InterfaceCaixaApp interfaceCaixaApp)
+        public CategoriaDespesaController(InterfaceCategoriaDespesaApp interfaceCategoriaDespesa)
         {
-            _interfaceDespesaApp = interfaceDespesaApp;
-            _interfaceOfertaApp = interfaceOfertaApp;
-            _interfaceCaixaApp = interfaceCaixaApp;
+            _interfaceCategoriaDespesa = interfaceCategoriaDespesa;
         }
-        // GET: Despesa
         public ActionResult Index()
         {
-            return View(_interfaceDespesaApp.List());
+            return View(_interfaceCategoriaDespesa.List());
         }
 
-        // GET: Despesa/Details/5
+        // GET: CategoriaDespesa/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Despesa/Create
+        // GET: CategoriaDespesa/Create
         public ActionResult Create()
         {
-            ViewBag.Categoria = null;
             return View();
         }
 
-        // POST: Despesa/Create
+        // POST: CategoriaDespesa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Despesa despesa)
+        public ActionResult Create(CategoriaDespesa Objeto)
         {
             try
             {
-                var resultado = _interfaceCaixaApp.BuscarSaldoDoMes(despesa.dateTime);
-                
-                _interfaceDespesaApp.Add(despesa);
+                // TODO: Add insert logic here
+                _interfaceCategoriaDespesa.Add(Objeto);
+               
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -59,13 +52,13 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: Despesa/Edit/5
+        // GET: CategoriaDespesa/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Despesa/Edit/5
+        // POST: CategoriaDespesa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -82,13 +75,13 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: Despesa/Delete/5
+        // GET: CategoriaDespesa/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Despesa/Delete/5
+        // POST: CategoriaDespesa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

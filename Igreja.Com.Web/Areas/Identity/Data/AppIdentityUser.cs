@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Igreja.Com.Dominio.Entidades;
 using Microsoft.AspNetCore.Identity;
 
 namespace Igreja.Com.Web.Areas.Identity.Data
@@ -17,5 +18,6 @@ namespace Igreja.Com.Web.Areas.Identity.Data
         public string Municipio { get; set; }
         public string UF { get; set; }
         public string CEP { get; set; }
+        public Igrejas Igrejas { get; set; }
     }
 }

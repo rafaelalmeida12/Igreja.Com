@@ -42,6 +42,8 @@ namespace Igreja.Com.Web
             services.AddSingleton<InterfaceDespesa, RepositorioDespesa>();
             services.AddSingleton<InterfaceOferta, RepositorioOferta>();
             services.AddSingleton<InterfaceCaixa, RepositorioCaixa>();
+            services.AddSingleton<InterfaceIgrejas, RepositorioIgrejas>();
+
 
 
             //Aplicação & Aplicação
@@ -52,6 +54,7 @@ namespace Igreja.Com.Web
             services.AddSingleton<InterfaceDespesaApp, DespesaApp>();
             services.AddSingleton<InterfaceOfertaApp, OfertaApp>();
             services.AddSingleton<InterfaceCaixaApp, CaixaApp>();
+            services.AddSingleton<InterfaceIgrejasApp, IgrejasApp>();
 
             services.AddSingleton<InterfaceServicoMembro, ServicoMembro>();
 

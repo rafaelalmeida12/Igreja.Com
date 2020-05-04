@@ -4,14 +4,16 @@ using Igreja.Com.Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Igreja.Com.Infra.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20200504203154_nueva")]
+    partial class nueva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,24 +70,6 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasIndex("MembroId");
 
                     b.ToTable("Cargo");
-                });
-
-            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.CategoriaDespesa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("dateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoriaDespesa");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Culto", b =>
@@ -172,18 +156,16 @@ namespace Igreja.Com.Infra.Migrations
                     b.Property<string>("NumeroNotaFiscal")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TipoDespesa")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("categoriaDespesaId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("categoriaDespesaId");
 
                     b.ToTable("Despesa");
                 });
@@ -376,13 +358,6 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasOne("Igreja.Com.Dominio.Entidades.Cargo", "Cargo")
                         .WithMany()
                         .HasForeignKey("CargoId");
-                });
-
-            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Despesa", b =>
-                {
-                    b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaDespesa", "categoriaDespesa")
-                        .WithMany()
-                        .HasForeignKey("categoriaDespesaId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Dizimo", b =>

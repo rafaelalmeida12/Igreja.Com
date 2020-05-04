@@ -9,48 +9,43 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Igreja.Com.Web.Controllers
 {
-    public class DespesaController : Controller
+    public class IgrejasController : Controller
     {
-        private readonly InterfaceDespesaApp _interfaceDespesaApp;
-        private readonly InterfaceOfertaApp _interfaceOfertaApp;
-        private readonly InterfaceCaixaApp _interfaceCaixaApp;
+        private readonly InterfaceIgrejasApp _interfaceIgrejas;
 
-        public DespesaController(InterfaceDespesaApp interfaceDespesaApp,
-            InterfaceOfertaApp interfaceOfertaApp, InterfaceCaixaApp interfaceCaixaApp)
+        // GET: Igrejas
+
+        public IgrejasController(InterfaceIgrejasApp interfaceIgrejas)
         {
-            _interfaceDespesaApp = interfaceDespesaApp;
-            _interfaceOfertaApp = interfaceOfertaApp;
-            _interfaceCaixaApp = interfaceCaixaApp;
+            _interfaceIgrejas = interfaceIgrejas;
         }
-        // GET: Despesa
         public ActionResult Index()
         {
-            return View(_interfaceDespesaApp.List());
+            return View(_interfaceIgrejas.List());
         }
 
-        // GET: Despesa/Details/5
+        // GET: Igrejas/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Despesa/Create
+        // GET: Igrejas/Create
         public ActionResult Create()
         {
-            ViewBag.Categoria = null;
             return View();
         }
 
-        // POST: Despesa/Create
+        // POST: Igrejas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Despesa despesa)
+        public ActionResult Create(Igrejas igrejas)
         {
             try
             {
-                var resultado = _interfaceCaixaApp.BuscarSaldoDoMes(despesa.dateTime);
-                
-                _interfaceDespesaApp.Add(despesa);
+                // TODO: Add insert logic here
+                _interfaceIgrejas.Add(igrejas);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -59,13 +54,13 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: Despesa/Edit/5
+        // GET: Igrejas/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Despesa/Edit/5
+        // POST: Igrejas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -82,13 +77,13 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: Despesa/Delete/5
+        // GET: Igrejas/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Despesa/Delete/5
+        // POST: Igrejas/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

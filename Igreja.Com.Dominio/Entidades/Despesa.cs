@@ -9,7 +9,7 @@ namespace Igreja.Com.Dominio.Entidades
     {
         public string NumeroNotaFiscal { get; set; }
         public decimal Valor { get; set; }
-        public TipoDespesa TipoDespesa { get; set; }
+        public CategoriaDespesa categoriaDespesa { get; set; }
         public string Descricao { get; set; }
         public TipoDestinoDespesa DestinoDespesa { get; set; }
     }

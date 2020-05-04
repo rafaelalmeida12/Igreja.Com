@@ -10,8 +10,8 @@ namespace Igreja.Com.Dominio.Entidades
         DateTime _dateTime;
         public DateTime dateTime
         {
-            get => _dateTime=DateTime.Now;
-            //set => _dateTime = DateTime.Now;
+            get=> _dateTime;
+            set => _dateTime = DateTime.Now;
         }
     }
 }
