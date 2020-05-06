@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Igreja.Com.Web.Migrations
 {
     [DbContext(typeof(AppIdentityContext))]
-    [Migration("20200424200403_usuarioo")]
-    partial class usuarioo
+    [Migration("20200506013556_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace Igreja.Com.Web.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Igrejas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Igrejas");
+                });
 
             modelBuilder.Entity("Igreja.Com.Web.Areas.Identity.Data.AppIdentityUser", b =>
                 {
@@ -51,6 +69,9 @@ namespace Igreja.Com.Web.Migrations
 
                     b.Property<string>("Endereco")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IgrejasId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -98,6 +119,8 @@ namespace Igreja.Com.Web.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IgrejasId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -243,6 +266,15 @@ namespace Igreja.Com.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Igreja.Com.Web.Areas.Identity.Data.AppIdentityUser", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", "Igrejas")
+                        .WithMany()
+                        .HasForeignKey("IgrejasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Igreja.Com.Infra.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200501230928_valorDespesa")]
-    partial class valorDespesa
+    [Migration("20200506130245_INICIALL")]
+    partial class INICIALL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,34 @@ namespace Igreja.Com.Infra.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Caixa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Saldo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("despesaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ofertaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("despesaId");
+
+                    b.HasIndex("ofertaId");
+
+                    b.ToTable("Caixa");
+                });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Cargo", b =>
                 {
@@ -42,6 +70,24 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasIndex("MembroId");
 
                     b.ToTable("Cargo");
+                });
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.CategoriaDespesa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("categoriaDespesas");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Culto", b =>
@@ -128,16 +174,18 @@ namespace Igreja.Com.Infra.Migrations
                     b.Property<string>("NumeroNotaFiscal")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoDespesa")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("categoriaDespesaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("categoriaDespesaId");
 
                     b.ToTable("Despesa");
                 });
@@ -201,6 +249,24 @@ namespace Igreja.Com.Infra.Migrations
                     b.ToTable("Endereco");
                 });
 
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Igrejas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Igrejas");
+                });
+
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Membro", b =>
                 {
                     b.Property<int>("Id")
@@ -232,6 +298,12 @@ namespace Igreja.Com.Infra.Migrations
                     b.Property<int>("EstadoCivil")
                         .HasColumnType("int");
 
+                    b.Property<int>("IgrejaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IgrejasId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -254,6 +326,8 @@ namespace Igreja.Com.Infra.Migrations
 
                     b.HasIndex("DadosMinisteriaisId");
 
+                    b.HasIndex("IgrejasId");
+
                     b.ToTable("Membro");
                 });
 
@@ -269,6 +343,9 @@ namespace Igreja.Com.Infra.Migrations
 
                     b.Property<string>("Observacao")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Saldo")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("TipoCultoId")
                         .HasColumnType("int");
@@ -286,6 +363,17 @@ namespace Igreja.Com.Infra.Migrations
                     b.ToTable("Oferta");
                 });
 
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Caixa", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Despesa", "despesa")
+                        .WithMany()
+                        .HasForeignKey("despesaId");
+
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Oferta", "oferta")
+                        .WithMany()
+                        .HasForeignKey("ofertaId");
+                });
+
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Cargo", b =>
                 {
                     b.HasOne("Igreja.Com.Dominio.Entidades.Membro", null)
@@ -298,6 +386,13 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasOne("Igreja.Com.Dominio.Entidades.Cargo", "Cargo")
                         .WithMany()
                         .HasForeignKey("CargoId");
+                });
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Despesa", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaDespesa", "categoriaDespesa")
+                        .WithMany()
+                        .HasForeignKey("categoriaDespesaId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Dizimo", b =>
@@ -329,6 +424,10 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasOne("Igreja.Com.Dominio.Entidades.DadosMinisteriais", "DadosMinisteriais")
                         .WithMany()
                         .HasForeignKey("DadosMinisteriaisId");
+
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", "Igrejas")
+                        .WithMany()
+                        .HasForeignKey("IgrejasId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Oferta", b =>

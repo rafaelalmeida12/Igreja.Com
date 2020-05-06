@@ -85,7 +85,7 @@ namespace Igreja.Com.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoriaDespesa");
+                    b.ToTable("categoriaDespesas");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Culto", b =>
@@ -272,6 +272,9 @@ namespace Igreja.Com.Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CargoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Celular")
                         .HasColumnType("nvarchar(max)");
 
@@ -296,6 +299,9 @@ namespace Igreja.Com.Infra.Migrations
                     b.Property<int>("EstadoCivil")
                         .HasColumnType("int");
 
+                    b.Property<int>("IgrejaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -317,6 +323,8 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DadosMinisteriaisId");
+
+                    b.HasIndex("IgrejaId");
 
                     b.ToTable("Membro");
                 });
@@ -414,6 +422,12 @@ namespace Igreja.Com.Infra.Migrations
                     b.HasOne("Igreja.Com.Dominio.Entidades.DadosMinisteriais", "DadosMinisteriais")
                         .WithMany()
                         .HasForeignKey("DadosMinisteriaisId");
+
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", "Igreja")
+                        .WithMany()
+                        .HasForeignKey("IgrejaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Oferta", b =>

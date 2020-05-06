@@ -18,6 +18,7 @@ namespace Igreja.Com.Web.Areas.Identity.Data
         public string Municipio { get; set; }
         public string UF { get; set; }
         public string CEP { get; set; }
+        public int IgrejasId { get; set; }
         public Igrejas Igrejas { get; set; }
     }
 }

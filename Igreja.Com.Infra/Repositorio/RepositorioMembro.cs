@@ -16,7 +16,7 @@ namespace Igreja.Com.Infra.Repositorio
         {
             dbContextOptions = new DbContextOptions<Contexto>();
         }
-        public List<Membro> GetAll()
+        public List<Membro> GetAll(int IgrejaId)
         {
              using (var busca = new Contexto(dbContextOptions))
             {
@@ -25,6 +25,7 @@ namespace Igreja.Com.Infra.Repositorio
                     .Include(C=>C.Endereco)
                     .Include(d=>d.DadosMinisteriais)
                     .Include(d=>d.Cargos)
+                    .Where(c=>c.IgrejaId==IgrejaId)
                     .ToList();
             }
         }
