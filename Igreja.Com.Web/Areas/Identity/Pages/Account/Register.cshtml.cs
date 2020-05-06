@@ -69,7 +69,7 @@ namespace Igreja.Com.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public int IgrejasId { get; set; }
-           public Igrejas igrejas { get; set; }
+            public Igrejas igrejas { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

@@ -107,7 +107,9 @@ namespace Igreja.Com.Web.Controllers
         }
         private void CarregarViewBags()
         {
-            ViewBag.Membro = new SelectList(interfaceMembro.GetAll(), "Id", "Nome");
+            //var user = await _userManager.GetUserAsync(this.User);
+            int igrejaId=0;
+            ViewBag.Membro = new SelectList(interfaceMembro.GetAll(igrejaId), "Id", "Nome");
             ViewBag.Culto = new SelectList(interfaceCulto.GetAll(), "Id", "Nome");
         }
     }

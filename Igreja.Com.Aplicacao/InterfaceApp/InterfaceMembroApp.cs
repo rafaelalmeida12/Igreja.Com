@@ -8,7 +8,7 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
 {
     public interface InterfaceMembroApp : InterfaceBaseApp<Membro>
     {
-        List<Membro> GetAll();
+        List<Membro> GetAll(int igrejaId);
         bool Existe(Membro membro);
         Task EhValido(Membro membro);
         Membro BuscarPorId(int Id);

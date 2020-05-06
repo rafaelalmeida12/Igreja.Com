@@ -32,9 +32,9 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
       
 
-        public List<Membro> GetAll()
+        public List<Membro> GetAll(int igrejaId)
         {
-            return interfaceMembro.GetAll();
+            return interfaceMembro.GetAll(igrejaId);
         }
 
         public Membro GetEntityById(int Id)

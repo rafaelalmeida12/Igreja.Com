@@ -1,4 +1,4 @@
-﻿@model Igreja.Com.Web.ViewsModels.MembroViewModel
+﻿@model MembroViewModel
 
 <h4>MembroViewModel</h4>
 <hr />
@@ -28,16 +28,22 @@
                 </select>
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
+            <div class="form-group bmd-form-group">
+                <select asp-for="IgrejaId" class="form-control" asp-items="ViewBag.Igrejas">
+                    <option selected="selected" value="">Sexo</option>
+                </select>
+                <span asp-validation-for="IgrejaId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="DataNascimento" class="control-label"></label>
                 <input asp-for="DataNascimento" type="date" class="form-control" />
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="Cargos" asp-items="ViewBag.Cargo" class="form-control">
+                <select asp-for="CargoId" asp-items="ViewBag.Cargo" class="form-control">
                     <option selected="selected" value="">Cargos</option>
                 </select>
-                <span asp-validation-for="Cargos" class="text-danger"></span>
+                <span asp-validation-for="CargoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Batizado</label>

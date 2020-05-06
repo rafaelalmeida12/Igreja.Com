@@ -20,26 +20,31 @@ namespace Igreja.Com.Web.Controllers
     {
         private readonly InterfaceMembroApp interfaceMembro;
         private readonly InterfaceCargoApp _interfaceCargos;
+        private readonly InterfaceIgrejasApp _interfaceIgrejasApp;
         private readonly UserManager<AppIdentityUser> userManager;
 
         public MembrosController(InterfaceMembroApp interfaceMembro, UserManager<AppIdentityUser> userManager,
-            InterfaceCargoApp interfaceCargos)
+            InterfaceCargoApp interfaceCargos,InterfaceIgrejasApp interfaceIgrejasApp)
         {
             this.interfaceMembro = interfaceMembro;
             this.userManager = userManager;
             _interfaceCargos = interfaceCargos;
+            _interfaceIgrejasApp = interfaceIgrejasApp;
         }
 
         public ActionResult Index()
         {
-            return View(interfaceMembro.GetAll());
+            int igrejaId = 0;
+            return View(interfaceMembro.GetAll(igrejaId));
         }
         public ActionResult Create()
         {
+            ViewBag.Igrejas =new SelectList(_interfaceIgrejasApp.List(),"Id","Nome");
             return View();
         }
         public ActionResult CriarParcial()
         {
+            ViewBag.Igrejas = new SelectList(_interfaceIgrejasApp.List(), "Id", "Nome");
             ViewBag.Cargo = new SelectList(_interfaceCargos.List(), "Id", "Descricao");
             return View();
         }
@@ -50,11 +55,12 @@ namespace Igreja.Com.Web.Controllers
             {
                 var membro = new Membro();
                 membro.Nome = membroView.NomeCompleto;
-                membro.Cargos = membroView.Cargos;
+                membro.CargoId = membroView.CargoId;
                 membro.DadosMinisteriais = membroView.DadosMinisteriais;
                 membro.DataNascimento = membroView.DataNascimento;
                 membro.Sexo = membroView.Sexo;
                 membro.Telefone = membroView.Telefone;
+                membro.IgrejaId = membroView.IgrejaId;
 
                 interfaceMembro.Add(membro);
                 return RedirectToAction("Index");
@@ -190,8 +196,8 @@ namespace Igreja.Com.Web.Controllers
 
         public ActionResult Criar()
         {
-
-            var membro = interfaceMembro.GetAll();
+            int igrejaId = 0;
+            var membro = interfaceMembro.GetAll(igrejaId);
 
             return View("ResumoMembro", membro);
         }

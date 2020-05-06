@@ -15,7 +15,7 @@ namespace Igreja.Com.Web.ViewsModels
         public DadosMinisteriais DadosMinisteriais { get; set; }
         public TipoSexo Sexo { get; set; }
         public int CargoId { get; set; }
-        public IEnumerable<Cargo> Cargos { get; set; }
+        public int IgrejaId { get; set; }
         public DateTime DataNascimento { get; set; }
        
     }

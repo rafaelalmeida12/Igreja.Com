@@ -8,32 +8,33 @@ using Microsoft.Extensions.Logging;
 using Igreja.Com.Web.Models;
 using Igreja.Com.Aplicacao.InterfaceApp;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Igreja.Com.Web.Areas.Identity.Data;
 
 namespace Igreja.Com.Web.Controllers
 {
-   
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly InterfaceMembroApp interfaceMembro;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, InterfaceMembroApp _interfaceMembro)
+        public HomeController(ILogger<HomeController> logger, InterfaceMembroApp _interfaceMembro,
+           UserManager<AppIdentityUser> userManager)
         {
             _logger = logger;
-            interfaceMembro=_interfaceMembro;
+            interfaceMembro = _interfaceMembro;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Membro = interfaceMembro.GetAll();
+            var user = await _userManager.GetUserAsync(this.User);
+            ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
             return View();
         }
 
-        public IActionResult User()
-        {
-            
-            return View();
-        }
         public IActionResult Tabela()
         {
             return View();

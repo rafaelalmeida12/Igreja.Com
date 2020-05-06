@@ -21,7 +21,10 @@ namespace Igreja.Com.Dominio.Entidades
         public string Curso { get; set; }
         public Endereco Endereco { get; set; }
         public DadosMinisteriais DadosMinisteriais { get; set; }
+        public int CargoId { get; set; }
         public IEnumerable<Cargo> Cargos { get; set; }
+        public int IgrejaId { get; set; }
+        public Igrejas Igreja { get; set; } 
 
     }
 }
