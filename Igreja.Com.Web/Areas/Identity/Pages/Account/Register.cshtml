@@ -2,6 +2,7 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Registrar Usuario";
+    ViewBag.Igrejas = ViewData["Igrejas"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -26,6 +27,13 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.IgrejasId"></label>
+                <select asp-for="Input.IgrejasId" asp-items="ViewBag.Igrejas" class="form-control" >
+                    <option>selecione...</option>
+                </select>
+                <span asp-validation-for="Input.IgrejasId" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>
