@@ -31,7 +31,7 @@ namespace Igreja.Com.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(this.User);
-            ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
+            if (user!= null)ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
             return View();
         }
 
