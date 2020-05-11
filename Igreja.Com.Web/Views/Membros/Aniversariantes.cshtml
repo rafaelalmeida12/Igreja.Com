@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header card-header-tabs card-header-primary">
+                <div class="nav-tabs-navigation">
+                    <div class="row nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Aniversariantes do Mês:</span>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-action="Aniversariantes" asp-controller="Membros" asp-route-id="1" data-toggle="tab">
+                                    Janeiro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Fevereiro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Março
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Abril
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Maio
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Junho
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Julho
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Agosto
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Setembro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <br>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Outubro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Novembro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#profile" data-toggle="tab">
+                                    Dezembro
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           <partial name="_MesAniversario"  />
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/core/jquery.min.js"></script>
+<script src="~/js/Membros.js"></script>

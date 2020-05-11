@@ -12,5 +12,6 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
         bool Existe(Membro membro);
         Task EhValido(Membro membro);
         Membro BuscarPorId(int Id);
+        IList<Membro> BuscarAniversariantes(DateTime dateTime);
     }
 }

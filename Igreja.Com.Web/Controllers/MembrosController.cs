@@ -24,7 +24,7 @@ namespace Igreja.Com.Web.Controllers
         private readonly UserManager<AppIdentityUser> userManager;
 
         public MembrosController(InterfaceMembroApp interfaceMembro, UserManager<AppIdentityUser> userManager,
-            InterfaceCargoApp interfaceCargos,InterfaceIgrejasApp interfaceIgrejasApp)
+            InterfaceCargoApp interfaceCargos, InterfaceIgrejasApp interfaceIgrejasApp)
         {
             this.interfaceMembro = interfaceMembro;
             this.userManager = userManager;
@@ -39,7 +39,7 @@ namespace Igreja.Com.Web.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.Igrejas =new SelectList(_interfaceIgrejasApp.List(),"Id","Nome");
+            ViewBag.Igrejas = new SelectList(_interfaceIgrejasApp.List(), "Id", "Nome");
             return View();
         }
         public ActionResult CriarParcial()
@@ -73,13 +73,22 @@ namespace Igreja.Com.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               // membro.dateTime = DateTime.Now;
+                // membro.dateTime = DateTime.Now;
                 interfaceMembro.Add(membro);
                 return RedirectToAction("Index");
             }
             return View(membro);
         }
 
+        public ActionResult Aniversariantes(int id)
+        {
+            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            return View();
+        }
+        public IList<Membro> BuscarAniversariantes()
+        {
+            return  interfaceMembro.BuscarAniversariantes(DateTime.Now);
+        }
         // GET: Membros/Edit/5
         public ActionResult Edit(int id)
         {

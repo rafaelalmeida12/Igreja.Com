@@ -10,6 +10,7 @@ using Igreja.Com.Aplicacao.InterfaceApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Igreja.Com.Web.Areas.Identity.Data;
+using System.Globalization;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -31,7 +32,9 @@ namespace Igreja.Com.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(this.User);
-            if (user!= null)ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
+            if (user != null) ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
+            var mes = ExibirMesPorExtenso(new DateTime(2019, 7, 7));
+            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
             return View();
         }
 
@@ -48,6 +51,11 @@ namespace Igreja.Com.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public string ExibirMesPorExtenso(DateTime data)
+        {
+            return data.ToString("MMMM", CultureInfo.CreateSpecificCulture("pt-br"));
         }
     }
 }

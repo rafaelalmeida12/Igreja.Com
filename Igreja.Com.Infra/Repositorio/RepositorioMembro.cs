@@ -18,14 +18,14 @@ namespace Igreja.Com.Infra.Repositorio
         }
         public List<Membro> GetAll(int IgrejaId)
         {
-             using (var busca = new Contexto(dbContextOptions))
+            using (var busca = new Contexto(dbContextOptions))
             {
                 return busca.Membro
                     .AsNoTracking()
-                    .Include(C=>C.Endereco)
-                    .Include(d=>d.DadosMinisteriais)
-                    .Include(d=>d.Cargos)
-                    .Where(c=>c.IgrejaId==IgrejaId)
+                    .Include(C => C.Endereco)
+                    .Include(d => d.DadosMinisteriais)
+                    .Include(d => d.Cargos)
+                    .Where(c => c.IgrejaId == IgrejaId)
                     .ToList();
             }
         }
@@ -37,6 +37,18 @@ namespace Igreja.Com.Infra.Repositorio
                     .Include(c => c.Endereco)
                     .Where(c => c.Id == Id)
                     .FirstOrDefault();
+            }
+        }
+
+        public IList<Membro> BuscarAniversariantes(DateTime dateTime)
+        {
+            using (var data = new Contexto(dbContextOptions))
+            {
+                return data.Membro
+                   .Where(c => c.DataNascimento.Month == dateTime.Month)
+                   .AsNoTracking()
+                   .ToList();
+
             }
         }
     }
