@@ -36,9 +36,9 @@ namespace Igreja.Com.Infra.Configuracao
                 .Entity<Endereco>()
                 .Property<int>("MembroId");
 
-           modelBuilder
-                .Entity<Endereco>()
-                .HasKey("MembroId");
+            modelBuilder
+                 .Entity<Endereco>()
+                 .HasKey("MembroId");
 
             base.OnModelCreating(modelBuilder);
         }

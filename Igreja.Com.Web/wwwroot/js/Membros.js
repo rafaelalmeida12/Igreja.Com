@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
 
     BuscarAniversariantes();
+    CarregarMes();
+    carreseletores();
 });
 
 function BuscarAniversariantes() {
@@ -15,7 +17,7 @@ function BuscarAniversariantes() {
             var dtNascimento = $("<td>").text(result.dataNascimento);
             var linhabotao = $("<td>").addClass("td-actions text-right");
 
-            var botao = $("<button>").attr("type", "button").attr("asp-action", "Detalhes").attr("asp-controller", "Membros").attr("rel","tooltip").addClass("btn btn-primary btn-link btn-sm");
+            var botao = $("<button>").attr("type", "button").attr("asp-action", "Detalhes").attr("asp-controller", "Membros").attr("rel", "tooltip").addClass("btn btn-primary btn-link btn-sm");
             var icone = $("<i>").addClass("material-icons").text("visibility");
 
             botao.append(icone);
@@ -31,6 +33,20 @@ function BuscarAniversariantes() {
     });
 }
 
-//<button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm" formaction="/Membros/Detalhes" data-original-title="Detalhes">
-//    <i class="material-icons">visibility</i>
-//    <div class="ripple-container"></div></button>
+function carreseletores() {
+    $(".form-check-input").on("click", function () {
+        event.preventDefault();
+        $(".dropIgrejas").toggle();
+    })
+}
+
+function CarregarMes() {
+    $(".nav-link").on("click", function () {
+        var text = $(this).text();
+
+        $.get("http://localhost:5000/Membros/TESTE", { mes: text }, function (data) {
+            console.log(data);
+        });
+    })
+}
+

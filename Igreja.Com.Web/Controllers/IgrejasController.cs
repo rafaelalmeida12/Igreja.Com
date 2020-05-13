@@ -6,6 +6,7 @@ using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -33,25 +34,18 @@ namespace Igreja.Com.Web.Controllers
         // GET: Igrejas/Create
         public ActionResult Create()
         {
+            ViewBag.Igrejas = new SelectList(_interfaceIgrejas.BuscarCedes(), "Id", "Nome");
             return View();
         }
 
-        // POST: Igrejas/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Igrejas igrejas)
         {
-            try
-            {
-                // TODO: Add insert logic here
-                _interfaceIgrejas.Add(igrejas);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _interfaceIgrejas.Add(igrejas);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Igrejas/Edit/5

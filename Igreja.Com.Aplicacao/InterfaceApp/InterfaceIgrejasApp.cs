@@ -7,5 +7,6 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
 {
     public interface InterfaceIgrejasApp:InterfaceBaseApp<Igrejas>
     {
+        IList<Igrejas> BuscarCedes();
     }
 }

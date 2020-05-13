@@ -80,11 +80,17 @@ namespace Igreja.Com.Web.Controllers
             return View(membro);
         }
 
-        public ActionResult Aniversariantes(int id)
+        public ActionResult Aniversariantes()
         {
             ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
             return View();
         }
+        public ActionResult TESTE(string mes)
+        {
+            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            return View();
+        }
+
         public IList<Membro> BuscarAniversariantes()
         {
             return  interfaceMembro.BuscarAniversariantes(DateTime.Now);
