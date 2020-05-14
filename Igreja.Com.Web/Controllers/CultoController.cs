@@ -13,17 +13,17 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class CultoController : Controller
     {
-        private readonly InterfaceCultoApp interfaceCulto;
+        private readonly InterfaceCultoApp _interfaceCulto;
 
         public CultoController(InterfaceCultoApp interfaceCulto)
         {
-            this.interfaceCulto = interfaceCulto;
+            _interfaceCulto = interfaceCulto;
         }
 
         // GET: Culto
         public ActionResult Index()
         {
-            return View(interfaceCulto.List());
+            return View(_interfaceCulto.List());
         }
 
         // GET: Culto/Details/5
@@ -47,7 +47,7 @@ namespace Igreja.Com.Web.Controllers
             { 
 
                 //culto.dateTime = DateTime.Now;
-                interfaceCulto.Add(culto);
+                _interfaceCulto.Add(culto);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -59,7 +59,7 @@ namespace Igreja.Com.Web.Controllers
         // GET: Culto/Edit/5
         public ActionResult Edit(int id)
         {
-          var culto= interfaceCulto.GetEntityById(id);
+          var culto= _interfaceCulto.GetEntityById(id);
             return View(culto);
         }
 
@@ -71,7 +71,7 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 // TODO: Add update logic here
-                interfaceCulto.Update(objeto);
+                _interfaceCulto.Update(objeto);
                 return RedirectToAction(nameof(Index));
             }
             catch

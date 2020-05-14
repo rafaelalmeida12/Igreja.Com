@@ -4,14 +4,16 @@ using Igreja.Com.Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Igreja.Com.Infra.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20200513190932_listademembros")]
+    partial class listademembros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,9 +322,6 @@ namespace Igreja.Com.Infra.Migrations
                     b.Property<int>("IgrejaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IgrejaSede")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -452,7 +451,7 @@ namespace Igreja.Com.Infra.Migrations
                         .HasForeignKey("DadosMinisteriaisId");
 
                     b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", "Igreja")
-                        .WithMany()
+                        .WithMany("Membros")
                         .HasForeignKey("IgrejaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -25,6 +25,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             return _interfaceIgrejas.BuscarCedes();
         }
 
+        public IList<Igrejas> BuscarFilialPorIgrejaID(int igrejasId)
+        {
+            return _interfaceIgrejas.BuscarFilialPorIgrejaID(igrejasId);
+        }
+
         public void Delete(Igrejas Objeto)
         {
             throw new NotImplementedException();
@@ -32,7 +37,7 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public Igrejas GetEntityById(int Id)
         {
-            throw new NotImplementedException();
+            return _interfaceIgrejas.GetEntityById(Id);
         }
 
         public List<Igrejas> List()

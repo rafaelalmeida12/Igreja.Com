@@ -3,55 +3,64 @@
 }
 
 
+@if (ViewBag.Mensagem.IgrejasId == null)
+{
+    <partial name="_IndexSede" />
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                    <p class="card-category">Membros Cadastrados:</p>
+                    <h3 class="card-title">
+                        @ViewBag.Membro.Count
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                    <p class="card-category">Membros Ativos:</p>
+                    <h3 class="card-title">@ViewBag.Membro.Count</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                    <p class="card-category">Membros Jovens:</p>
+                    <h3 class="card-title">@ViewBag.Membro.Count</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">person</i>
+                    </div>
+                    <p class="card-category">Membros Homens:</p>
+                    <h3 class="card-title">@ViewBag.Membro.Count</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-<div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">person</i>
-                </div>
-                <p class="card-category">Membros Cadastrados:</p>
-                <h3 class="card-title">
-                    @ViewBag.Membro.Count
-                </h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">person</i>
-                </div>
-                <p class="card-category">Membros Ativos:</p>
-                <h3 class="card-title">@ViewBag.Membro.Count</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">person</i>
-                </div>
-                <p class="card-category">Membros Jovens:</p>
-                <h3 class="card-title">@ViewBag.Membro.Count</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">person</i>
-                </div>
-                <p class="card-category">Membros Homens:</p>
-                <h3 class="card-title">@ViewBag.Membro.Count</h3>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 <div class="row">
     <div class="col-md-10">
         <div class="card card-chart">
@@ -71,8 +80,8 @@
             </div>
         </div>
     </div>
-
 </div>
+
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="card">
@@ -107,18 +116,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in ViewBag.Mes)
+                                @if (ViewBag.Mes != null)
                                 {
-                                    <tr>
-                                        <td>@item.Nome</td>
-                                        <td>@item.DataNascimento</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" asp-action="Detalhes" asp-controller="Membros" rel="tooltip" title="Detalhes" class="btn btn-primary btn-link btn-sm">
-                                                <i class="material-icons">visibility</i>
-                                            </button>
 
-                                        </td>
-                                    </tr>
+                                    foreach (var item in ViewBag.Mes)
+                                    {
+                                        <tr>
+                                            <td>@item.Nome</td>
+                                            <td>@item.DataNascimento</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" asp-action="Detalhes" asp-controller="Membros" rel="tooltip" title="Detalhes" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">visibility</i>
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>

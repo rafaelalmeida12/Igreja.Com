@@ -20,13 +20,32 @@ namespace Igreja.Com.Infra.Repositorio
         {
             using (var busca = new Contexto(dbContextOptions))
             {
-                return busca.Membro
+                var resultado = busca.Membro
                     .AsNoTracking()
                     .Include(C => C.Endereco)
                     .Include(d => d.DadosMinisteriais)
                     .Include(d => d.Cargos)
                     .Where(c => c.IgrejaId == IgrejaId)
                     .ToList();
+
+
+                return resultado;
+            }
+        }
+        public int BuscarTotalMembros(int IgrejaId)
+        {
+            using (var busca = new Contexto(dbContextOptions))
+            {
+
+                var resultado1= (from s in busca.Membro
+                                 where s.IgrejaId == IgrejaId
+                                 select s).AsNoTracking().Count();
+
+              var   resultado2= (from s in busca.Membro
+                        where s.IgrejaSede == IgrejaId
+                        select s).AsNoTracking().Count();
+
+                return resultado1 + resultado2;
             }
         }
         public Membro BuscarPorId(int Id)

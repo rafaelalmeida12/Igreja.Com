@@ -11,21 +11,21 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class DizimosController : Controller
     {
-        private readonly InterfaceDizimoApp interfaceDizimo;
-        private readonly InterfaceMembroApp interfaceMembro;
-        private readonly InterfaceCultoApp interfaceCulto;
+        private readonly InterfaceDizimoApp _interfaceDizimo;
+        private readonly InterfaceMembroApp _interfaceMembro;
+        private readonly InterfaceCultoApp _interfaceCulto;
 
         public DizimosController(InterfaceDizimoApp interfaceDizimo,InterfaceMembroApp interfaceMembro, InterfaceCultoApp interfaceCulto)
         {
-            this.interfaceDizimo = interfaceDizimo;
-            this.interfaceMembro = interfaceMembro;
-            this.interfaceCulto = interfaceCulto;
+           _interfaceDizimo = interfaceDizimo;
+           _interfaceMembro = interfaceMembro;
+           _interfaceCulto = interfaceCulto;
         }
 
         // GET: Dizimos
         public ActionResult Index()
         {
-            return View(interfaceDizimo.ListDizimo());
+            return View(_interfaceDizimo.ListDizimo());
         }
 
         // GET: Dizimos/Details/5
@@ -47,8 +47,8 @@ namespace Igreja.Com.Web.Controllers
         {
             try
             {
-              //  objeto.dateTime = DateTime.Now;
-                interfaceDizimo.Add(objeto);
+                //  objeto.dateTime = DateTime.Now;
+                _interfaceDizimo.Add(objeto);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -62,7 +62,7 @@ namespace Igreja.Com.Web.Controllers
         public ActionResult Edit(int id)
         {
             CarregarViewBags();
-            var dizimos= interfaceDizimo.GetEntityById(id);
+            var dizimos= _interfaceDizimo.GetEntityById(id);
             return View(dizimos);
         }
 
@@ -74,7 +74,7 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 // TODO: Add update logic here
-                interfaceDizimo.Update(dizimo);
+                _interfaceDizimo.Update(dizimo);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -109,8 +109,8 @@ namespace Igreja.Com.Web.Controllers
         {
             //var user = await _userManager.GetUserAsync(this.User);
             int igrejaId=0;
-            ViewBag.Membro = new SelectList(interfaceMembro.GetAll(igrejaId), "Id", "Nome");
-            ViewBag.Culto = new SelectList(interfaceCulto.GetAll(), "Id", "Nome");
+            ViewBag.Membro = new SelectList(_interfaceMembro.GetAll(igrejaId), "Id", "Nome");
+            ViewBag.Culto = new SelectList(_interfaceCulto.GetAll(), "Id", "Nome");
         }
     }
 }

@@ -19,12 +19,19 @@ namespace Igreja.Com.Infra.Repositorio
 
         public IList<Igrejas> BuscarCedes()
         {
-
             using (var data = new Contexto(dbContextOptions))
             {
                 return data.Igrejas
                     .Where(c => c.IgrejasId == null).ToList();
+            }
+        }
 
+        public IList<Igrejas> BuscarFilialPorIgrejaID(int igrejasId)
+        {
+            using (var data = new Contexto(dbContextOptions))
+            {
+                return data.Igrejas
+                    .Where(c => c.IgrejasId == igrejasId).ToList();
             }
         }
     }

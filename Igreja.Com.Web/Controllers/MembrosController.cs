@@ -18,24 +18,24 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class MembrosController : Controller
     {
-        private readonly InterfaceMembroApp interfaceMembro;
+        private readonly InterfaceMembroApp _interfaceMembro;
         private readonly InterfaceCargoApp _interfaceCargos;
         private readonly InterfaceIgrejasApp _interfaceIgrejasApp;
-        private readonly UserManager<AppIdentityUser> userManager;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
         public MembrosController(InterfaceMembroApp interfaceMembro, UserManager<AppIdentityUser> userManager,
             InterfaceCargoApp interfaceCargos, InterfaceIgrejasApp interfaceIgrejasApp)
         {
-            this.interfaceMembro = interfaceMembro;
-            this.userManager = userManager;
+            _interfaceMembro = interfaceMembro;
+            _userManager = userManager;
             _interfaceCargos = interfaceCargos;
             _interfaceIgrejasApp = interfaceIgrejasApp;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            int igrejaId = 0;
-            return View(interfaceMembro.GetAll(igrejaId));
+            var user = await _userManager.GetUserAsync(this.User);
+            return View(_interfaceMembro.GetAll(user.IgrejasId));
         }
         public ActionResult Create()
         {
@@ -54,6 +54,11 @@ namespace Igreja.Com.Web.Controllers
             if (ModelState.IsValid)
             {
                 var membro = new Membro();
+                var VerificaSede = _interfaceIgrejasApp.GetEntityById(membroView.IgrejaId);
+                if (VerificaSede.IgrejasId != null)
+                {
+                    membro.IgrejaSede = VerificaSede.IgrejasId;
+                }
                 membro.Nome = membroView.NomeCompleto;
                 membro.CargoId = membroView.CargoId;
                 membro.DadosMinisteriais = membroView.DadosMinisteriais;
@@ -62,7 +67,7 @@ namespace Igreja.Com.Web.Controllers
                 membro.Telefone = membroView.Telefone;
                 membro.IgrejaId = membroView.IgrejaId;
 
-                interfaceMembro.Add(membro);
+                _interfaceMembro.Add(membro);
                 return RedirectToAction("Index");
             }
             return View(membroView);
@@ -73,8 +78,13 @@ namespace Igreja.Com.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var VerificaSede = _interfaceIgrejasApp.GetEntityById(membro.IgrejaId);
+                if (VerificaSede.IgrejasId!=null)
+                {
+                    membro.IgrejaSede = VerificaSede.IgrejasId;
+                }
                 // membro.dateTime = DateTime.Now;
-                interfaceMembro.Add(membro);
+                _interfaceMembro.Add(membro);
                 return RedirectToAction("Index");
             }
             return View(membro);
@@ -82,23 +92,23 @@ namespace Igreja.Com.Web.Controllers
 
         public ActionResult Aniversariantes()
         {
-            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            ViewBag.Mes = _interfaceMembro.BuscarAniversariantes(DateTime.Now);
             return View();
         }
         public ActionResult TESTE(string mes)
         {
-            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            ViewBag.Mes = _interfaceMembro.BuscarAniversariantes(DateTime.Now);
             return View();
         }
 
         public IList<Membro> BuscarAniversariantes()
         {
-            return  interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            return _interfaceMembro.BuscarAniversariantes(DateTime.Now);
         }
         // GET: Membros/Edit/5
         public ActionResult Edit(int id)
         {
-            var membro = interfaceMembro.BuscarPorId(id);
+            var membro = _interfaceMembro.BuscarPorId(id);
             return View(membro);
         }
 
@@ -109,7 +119,7 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 // TODO: Add update logic here
-                interfaceMembro.Update(membro);
+                _interfaceMembro.Update(membro);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -143,7 +153,7 @@ namespace Igreja.Com.Web.Controllers
         public ActionResult ResumoMembro()
         {
 
-            return View(interfaceMembro.List());
+            return View(_interfaceMembro.List());
         }
         public ActionResult Details(int id)
         {
@@ -212,25 +222,9 @@ namespace Igreja.Com.Web.Controllers
         public ActionResult Criar()
         {
             int igrejaId = 0;
-            var membro = interfaceMembro.GetAll(igrejaId);
+            var membro = _interfaceMembro.GetAll(igrejaId);
 
             return View("ResumoMembro", membro);
-        }
-        public async Task CADASTRARUSUARIO(Membro membro)
-        {
-            var usuario = await userManager.GetUserAsync(this.User);
-
-            usuario.Nome = membro.Nome;
-            usuario.Email = membro.Email;
-            usuario.Telefone = membro.Telefone;
-            usuario.Endereco = membro.Endereco.Bairro;
-            usuario.Complemento = membro.Endereco.Complemento;
-            usuario.Bairro = membro.Endereco.Bairro;
-            usuario.Municipio = "Porto-Velho";
-            usuario.UF = "RO";
-            usuario.CEP = "76813-040";
-
-            await userManager.UpdateAsync(usuario);
         }
     }
 }

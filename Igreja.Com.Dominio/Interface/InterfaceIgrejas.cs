@@ -8,6 +8,7 @@ namespace Igreja.Com.Dominio.Interface
     public interface InterfaceIgrejas:InterfaceBase<Igrejas>
     {
         IList<Igrejas> BuscarCedes();
+        IList<Igrejas> BuscarFilialPorIgrejaID(int igrejasId);
 
     }
 }

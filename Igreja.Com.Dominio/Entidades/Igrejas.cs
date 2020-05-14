@@ -7,7 +7,7 @@ namespace Igreja.Com.Dominio.Entidades
 {
     public class Igrejas : Base
     {
-        [Required(ErrorMessage ="Nome Obrigatorio")]
+        [Required(ErrorMessage = "Nome Obrigatorio")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Rua Obrigatorio")]
         public string Rua { get; set; }

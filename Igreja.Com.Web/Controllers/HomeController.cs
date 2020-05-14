@@ -14,27 +14,40 @@ using System.Globalization;
 
 namespace Igreja.Com.Web.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly InterfaceMembroApp interfaceMembro;
+        private readonly InterfaceMembroApp _interfaceMembro;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly InterfaceIgrejasApp _interfaceIgrejasApp;
 
-        public HomeController(ILogger<HomeController> logger, InterfaceMembroApp _interfaceMembro,
-           UserManager<AppIdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, InterfaceMembroApp interfaceMembro,
+           UserManager<AppIdentityUser> userManager, InterfaceIgrejasApp interfaceIgrejas)
         {
             _logger = logger;
-            interfaceMembro = _interfaceMembro;
+            _interfaceMembro = interfaceMembro;
             _userManager = userManager;
+            _interfaceIgrejasApp = interfaceIgrejas;
         }
 
         public async Task<IActionResult> Index()
         {
+            //PEGA O USUARIO LOGADO
             var user = await _userManager.GetUserAsync(this.User);
-            if (user != null) ViewBag.Membro = interfaceMembro.GetAll(user.IgrejasId);
-            var mes = ExibirMesPorExtenso(new DateTime(2019, 7, 7));
-            ViewBag.Mes = interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            //BUSCAR NOME IGREJA POR ID
+            int igrejaID = user.IgrejasId;
+            TempData["Igreja"]= _interfaceIgrejasApp.GetEntityById(igrejaID);
+            ViewBag.Mensagem = TempData["Igreja"];
+            //CASO SEJA UMA FILIA BUSCA TODAS
+             ViewBag.igrejasfiliais = _interfaceIgrejasApp.BuscarFilialPorIgrejaID(igrejaID);
+            //BUSCAR MEMBROS POR ID
+            var membros = _interfaceMembro.GetAll(igrejaID);
+            ViewBag.Membro = membros;
+            ViewBag.TotalGeral = _interfaceMembro.BuscarTotalMembros(igrejaID);
+            //Carrega aniversariantes
+            ViewBag.Mes = _interfaceMembro.BuscarAniversariantes(DateTime.Now);
+            
             return View();
         }
 

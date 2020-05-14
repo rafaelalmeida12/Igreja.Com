@@ -14,7 +14,7 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         private readonly InterfaceMembro interfaceMembro;
         private readonly InterfaceServicoMembro interfaceServico;
 
-        public MembroApp(InterfaceMembro interfaceMembro,InterfaceServicoMembro interfaceServico)
+        public MembroApp(InterfaceMembro interfaceMembro, InterfaceServicoMembro interfaceServico)
         {
             this.interfaceMembro = interfaceMembro;
             this.interfaceServico = interfaceServico;
@@ -30,7 +30,12 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             throw new NotImplementedException();
         }
 
-      
+        public int BuscarTotalMembros(int IgrejaId)
+        {
+
+            return interfaceMembro.BuscarTotalMembros(IgrejaId);
+        }
+
 
         public List<Membro> GetAll(int igrejaId)
         {
@@ -60,7 +65,7 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public bool Existe(Membro membro)
         {
-          return interfaceServico.Existe(membro);
+            return interfaceServico.Existe(membro);
         }
 
         public Membro BuscarPorId(int Id)
@@ -72,6 +77,8 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         {
             return interfaceMembro.BuscarAniversariantes(dateTime);
         }
+
+
         #endregion
     }
 }

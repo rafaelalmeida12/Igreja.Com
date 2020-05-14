@@ -10,11 +10,11 @@ namespace Igreja.Com.Web.Controllers
 {
     public class DocumentosController : Controller
     {
-        private readonly InterfaceMembroApp interfaceMembro;
+        private readonly InterfaceMembroApp _interfaceMembro;
 
         public DocumentosController(InterfaceMembroApp _interfaceMembro)
         {
-            interfaceMembro = _interfaceMembro;
+            _interfaceMembro = _interfaceMembro;
         }
         // GET: Documentos
         public ActionResult Index()
