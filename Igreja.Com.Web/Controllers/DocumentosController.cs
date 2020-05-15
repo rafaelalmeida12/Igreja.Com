@@ -10,12 +10,15 @@ namespace Igreja.Com.Web.Controllers
 {
     public class DocumentosController : Controller
     {
+        #region Construtores
+      
         private readonly InterfaceMembroApp _interfaceMembro;
 
-        public DocumentosController(InterfaceMembroApp _interfaceMembro)
+        public DocumentosController(InterfaceMembroApp interfaceMembro)
         {
-            _interfaceMembro = _interfaceMembro;
+            _interfaceMembro = interfaceMembro;
         }
+        #endregion
         // GET: Documentos
         public ActionResult Index()
         {

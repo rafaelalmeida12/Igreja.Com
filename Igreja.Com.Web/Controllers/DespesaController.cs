@@ -11,6 +11,8 @@ namespace Igreja.Com.Web.Controllers
 {
     public class DespesaController : Controller
     {
+        #region Construtores
+       
         private readonly InterfaceDespesaApp _interfaceDespesaApp;
         private readonly InterfaceOfertaApp _interfaceOfertaApp;
         private readonly InterfaceCaixaApp _interfaceCaixaApp;
@@ -22,6 +24,7 @@ namespace Igreja.Com.Web.Controllers
             _interfaceOfertaApp = interfaceOfertaApp;
             _interfaceCaixaApp = interfaceCaixaApp;
         }
+        #endregion
         // GET: Despesa
         public ActionResult Index()
         {

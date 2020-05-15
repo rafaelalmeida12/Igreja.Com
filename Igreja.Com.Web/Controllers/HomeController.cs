@@ -17,6 +17,8 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        #region Construtores
+       
         private readonly ILogger<HomeController> _logger;
         private readonly InterfaceMembroApp _interfaceMembro;
         private readonly UserManager<AppIdentityUser> _userManager;
@@ -30,15 +32,15 @@ namespace Igreja.Com.Web.Controllers
             _userManager = userManager;
             _interfaceIgrejasApp = interfaceIgrejas;
         }
-
+        #endregion
         public async Task<IActionResult> Index()
         {
             //PEGA O USUARIO LOGADO
             var user = await _userManager.GetUserAsync(this.User);
             //BUSCAR NOME IGREJA POR ID
             int igrejaID = user.IgrejasId;
-            TempData["Igreja"]= _interfaceIgrejasApp.GetEntityById(igrejaID);
-            ViewBag.Mensagem = TempData["Igreja"];
+            ViewBag.Mensagem = _interfaceIgrejasApp.GetEntityById(igrejaID);
+            TempData["Igreja"] = ViewBag.Mensagem.Nome;
             //CASO SEJA UMA FILIA BUSCA TODAS
              ViewBag.igrejasfiliais = _interfaceIgrejasApp.BuscarFilialPorIgrejaID(igrejaID);
             //BUSCAR MEMBROS POR ID

@@ -9,16 +9,16 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 {
     public class CultoApp : InterfaceCultoApp
     {
-        private readonly InterfaceCulto interfaceCulto;
+        private readonly InterfaceCulto _interfaceCulto;
 
         public CultoApp(InterfaceCulto interfaceCulto)
         {
-            this.interfaceCulto = interfaceCulto;
+            _interfaceCulto = interfaceCulto;
         }
 
         public void Add(Culto Objeto)
         {
-            interfaceCulto.Add(Objeto);
+            _interfaceCulto.Add(Objeto);
         }
 
         public void Delete(Culto Objeto)
@@ -28,22 +28,22 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public List<Culto> GetAll()
         {
-            return interfaceCulto.GetAll();
+            return _interfaceCulto.GetAll();
         }
 
         public Culto GetEntityById(int Id)
         {
-            return interfaceCulto.GetEntityById(Id);
+            return _interfaceCulto.GetEntityById(Id);
         }
 
         public List<Culto> List()
         {
-            return interfaceCulto.List();
+            return _interfaceCulto.List();
         }
 
         public void Update(Culto Objeto)
         {
-            interfaceCulto.Update(Objeto);
+            _interfaceCulto.Update(Objeto);
         }
     }
 }

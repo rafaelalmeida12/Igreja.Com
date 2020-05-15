@@ -13,13 +13,15 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class CultoController : Controller
     {
+        #region Construtores
+      
         private readonly InterfaceCultoApp _interfaceCulto;
 
         public CultoController(InterfaceCultoApp interfaceCulto)
         {
             _interfaceCulto = interfaceCulto;
         }
-
+        #endregion
         // GET: Culto
         public ActionResult Index()
         {

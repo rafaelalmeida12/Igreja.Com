@@ -18,6 +18,8 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class MembrosController : Controller
     {
+        #region Construtores
+       
         private readonly InterfaceMembroApp _interfaceMembro;
         private readonly InterfaceCargoApp _interfaceCargos;
         private readonly InterfaceIgrejasApp _interfaceIgrejasApp;
@@ -31,7 +33,7 @@ namespace Igreja.Com.Web.Controllers
             _interfaceCargos = interfaceCargos;
             _interfaceIgrejasApp = interfaceIgrejasApp;
         }
-
+        #endregion
         public async Task<ActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(this.User);

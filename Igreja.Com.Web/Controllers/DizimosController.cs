@@ -11,6 +11,8 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class DizimosController : Controller
     {
+        #region Construtores
+      
         private readonly InterfaceDizimoApp _interfaceDizimo;
         private readonly InterfaceMembroApp _interfaceMembro;
         private readonly InterfaceCultoApp _interfaceCulto;
@@ -21,7 +23,7 @@ namespace Igreja.Com.Web.Controllers
            _interfaceMembro = interfaceMembro;
            _interfaceCulto = interfaceCulto;
         }
-
+        #endregion
         // GET: Dizimos
         public ActionResult Index()
         {

@@ -13,6 +13,8 @@ namespace Igreja.Com.Web.Controllers
 {
     public class OfertasController : Controller
     {
+        #region Construtores
+    
         private readonly InterfaceOfertaApp _interfaceOferta;
         private readonly InterfaceCaixaApp _interfaceCaixaApp;
 
@@ -22,31 +24,12 @@ namespace Igreja.Com.Web.Controllers
             _interfaceOferta = interfaceOferta;
             _interfaceCaixaApp = interfaceCaixaApp;
         }
-
-        // GET: Ofertas
+        #endregion
         public IActionResult Index()
         {
             return View( _interfaceOferta.List());
         }
-
-        // GET: Ofertas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var oferta = _interfaceOferta.GetEntityById(id.Value);
-            if (oferta == null)
-            {
-                return NotFound();
-            }
-
-            return View(oferta);
-        }
-
-        // GET: Ofertas/Create
+       
         public IActionResult Create()
         {
             return View();
@@ -84,12 +67,12 @@ namespace Igreja.Com.Web.Controllers
             else
             {
                 caixaDoMes.Saldo += oferta.Valor;
+                
                 _interfaceCaixaApp.Update(caixaDoMes);
             }
             
         }
 
-        // GET: Ofertas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -105,12 +88,9 @@ namespace Igreja.Com.Web.Controllers
             return View(oferta);
         }
 
-        // POST: Ofertas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Observacao,Valor,DataCadastro,Id,dateTime")] Oferta oferta)
+        public async Task<IActionResult> Edit(int id,Oferta oferta)
         {
             if (id != oferta.Id)
             {
@@ -139,7 +119,22 @@ namespace Igreja.Com.Web.Controllers
             return View(oferta);
         }
 
-        // GET: Ofertas/Delete/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var oferta = _interfaceOferta.GetEntityById(id.Value);
+            if (oferta == null)
+            {
+                return NotFound();
+            }
+
+            return View(oferta);
+        }
+   
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -156,7 +151,6 @@ namespace Igreja.Com.Web.Controllers
             return View(oferta);
         }
 
-        // POST: Ofertas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -11,18 +11,18 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 {
     public class MembroApp : InterfaceMembroApp
     {
-        private readonly InterfaceMembro interfaceMembro;
-        private readonly InterfaceServicoMembro interfaceServico;
+        private readonly InterfaceMembro _interfaceMembro;
+        private readonly InterfaceServicoMembro _interfaceServico;
 
         public MembroApp(InterfaceMembro interfaceMembro, InterfaceServicoMembro interfaceServico)
         {
-            this.interfaceMembro = interfaceMembro;
-            this.interfaceServico = interfaceServico;
+            _interfaceMembro = interfaceMembro;
+            _interfaceServico = interfaceServico;
         }
 
         public void Add(Membro Objeto)
         {
-            interfaceMembro.Add(Objeto);
+            _interfaceMembro.Add(Objeto);
         }
 
         public void Delete(Membro Objeto)
@@ -33,49 +33,49 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         public int BuscarTotalMembros(int IgrejaId)
         {
 
-            return interfaceMembro.BuscarTotalMembros(IgrejaId);
+            return _interfaceMembro.BuscarTotalMembros(IgrejaId);
         }
 
 
         public List<Membro> GetAll(int igrejaId)
         {
-            return interfaceMembro.GetAll(igrejaId);
+            return _interfaceMembro.GetAll(igrejaId);
         }
 
         public Membro GetEntityById(int Id)
         {
-            return interfaceMembro.GetEntityById(Id);
+            return _interfaceMembro.GetEntityById(Id);
         }
 
         public List<Membro> List()
         {
-            return interfaceMembro.List();
+            return _interfaceMembro.List();
         }
 
         public void Update(Membro Objeto)
         {
-            interfaceMembro.Update(Objeto);
+            _interfaceMembro.Update(Objeto);
         }
 
         #region servicos
         public async Task EhValido(Membro membro)
         {
-            await interfaceServico.EhValido(membro);
+            await _interfaceServico.EhValido(membro);
         }
 
         public bool Existe(Membro membro)
         {
-            return interfaceServico.Existe(membro);
+            return _interfaceServico.Existe(membro);
         }
 
         public Membro BuscarPorId(int Id)
         {
-            return interfaceMembro.BuscarPorId(Id);
+            return _interfaceMembro.BuscarPorId(Id);
         }
 
         public IList<Membro> BuscarAniversariantes(DateTime dateTime)
         {
-            return interfaceMembro.BuscarAniversariantes(dateTime);
+            return _interfaceMembro.BuscarAniversariantes(dateTime);
         }
 
 

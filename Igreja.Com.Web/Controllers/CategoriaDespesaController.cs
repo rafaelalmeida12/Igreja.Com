@@ -11,30 +11,25 @@ namespace Igreja.Com.Web.Controllers
 {
     public class CategoriaDespesaController : Controller
     {
+        #region Construtores
+      
         private readonly InterfaceCategoriaDespesaApp _interfaceCategoriaDespesa;
 
         public CategoriaDespesaController(InterfaceCategoriaDespesaApp interfaceCategoriaDespesa)
         {
             _interfaceCategoriaDespesa = interfaceCategoriaDespesa;
         }
+        #endregion
         public ActionResult Index()
         {
             return View(_interfaceCategoriaDespesa.List());
         }
 
-        // GET: CategoriaDespesa/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CategoriaDespesa/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoriaDespesa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoriaDespesa Objeto)
@@ -52,13 +47,11 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: CategoriaDespesa/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CategoriaDespesa/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -75,13 +68,16 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        // GET: CategoriaDespesa/Delete/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CategoriaDespesa/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

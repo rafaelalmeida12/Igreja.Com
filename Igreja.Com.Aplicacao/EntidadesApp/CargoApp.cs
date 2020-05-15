@@ -9,16 +9,16 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 {
     public class CargoApp : InterfaceCargoApp
     {
-        InterfaceCargo InterfaceCargo;
+        InterfaceCargo _InterfaceCargo;
 
         public CargoApp(InterfaceCargo interfaceCargo)
         {
-            InterfaceCargo = interfaceCargo;
+            _InterfaceCargo = interfaceCargo;
         }
 
         public void Add(Cargo Objeto)
         {
-            InterfaceCargo.Add(Objeto);
+            _InterfaceCargo.Add(Objeto);
         }
 
         public void Delete(Cargo Objeto)
@@ -28,17 +28,17 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public Cargo GetEntityById(int Id)
         {
-            return InterfaceCargo.GetEntityById(Id);
+            return _InterfaceCargo.GetEntityById(Id);
         }
 
         public List<Cargo> List()
         {
-            return InterfaceCargo.List();
+            return _InterfaceCargo.List();
         }
 
         public void Update(Cargo Objeto)
         {
-            InterfaceCargo.Update(Objeto);
+            _InterfaceCargo.Update(Objeto);
         }
     }
 }

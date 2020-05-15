@@ -13,30 +13,19 @@ namespace Igreja.Com.Web.Controllers
     [Authorize]
     public class CargosController : Controller
     {
+        #region Construtores
+    
         private readonly InterfaceCargoApp _InterfaceCargo;
 
         public CargosController(InterfaceCargoApp context)
         {
             _InterfaceCargo = context;
         }
+        #endregion
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             return View( _InterfaceCargo.List());
-        }
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var cargo = _InterfaceCargo.GetEntityById(id.Value);
-            if (cargo == null)
-            {
-                return NotFound();
-            }
-            return View(cargo);
         }
 
         public IActionResult Create()
@@ -56,8 +45,7 @@ namespace Igreja.Com.Web.Controllers
             }
             return View(cargo);
         }
-
-        // GET: Cargoes/Edit/5
+   
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,9 +61,6 @@ namespace Igreja.Com.Web.Controllers
             return View(cargo);
         }
 
-        // POST: Cargoes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Cargo cargo)
@@ -107,7 +92,19 @@ namespace Igreja.Com.Web.Controllers
             return View(cargo);
         }
 
-        // GET: Cargoes/Delete/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var cargo = _InterfaceCargo.GetEntityById(id.Value);
+            if (cargo == null)
+            {
+                return NotFound();
+            }
+            return View(cargo);
+        }
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +121,6 @@ namespace Igreja.Com.Web.Controllers
             return View(cargo);
         }
 
-        // POST: Cargoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

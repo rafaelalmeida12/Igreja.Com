@@ -10,6 +10,8 @@ namespace Igreja.Com.Web.Controllers
 {
     public class CaixaController : Controller
     {
+
+        #region Construtores
         private readonly InterfaceOfertaApp _interfaceOfertaApp;
         private readonly InterfaceDespesaApp _interfaceDespesaApp;
         private readonly InterfaceCaixaApp _interfaceCaixaApp;
@@ -20,6 +22,8 @@ namespace Igreja.Com.Web.Controllers
             _interfaceDespesaApp = interfaceDespesaApp;
             _interfaceCaixaApp = interfaceCaixaApp;
         }
+        #endregion
+
         public ActionResult Index()
         {
             DateTime date = DateTime.Now;
@@ -29,11 +33,6 @@ namespace Igreja.Com.Web.Controllers
             return View();
         }
 
-        // GET: Caixa/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
         public ActionResult Create()
         {
             return View();
@@ -51,6 +50,10 @@ namespace Igreja.Com.Web.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult Details(int id)
+        {
+            return View();
         }
 
         // GET: Caixa/Edit/5

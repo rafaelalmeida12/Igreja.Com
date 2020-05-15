@@ -12,6 +12,8 @@ namespace Igreja.Com.Web.Controllers
 {
     public class IgrejasController : Controller
     {
+        #region Construtores
+      
         private readonly InterfaceIgrejasApp _interfaceIgrejas;
 
         // GET: Igrejas
@@ -20,6 +22,7 @@ namespace Igreja.Com.Web.Controllers
         {
             _interfaceIgrejas = interfaceIgrejas;
         }
+        #endregion
         public ActionResult Index()
         {
             return View(_interfaceIgrejas.List());

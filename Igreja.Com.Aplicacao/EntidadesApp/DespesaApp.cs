@@ -13,7 +13,7 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public DespesaApp(InterfaceDespesa interfaceDespesa)
         {
-            this._interfaceDespesa = interfaceDespesa;
+           _interfaceDespesa = interfaceDespesa;
         }
         public void Add(Despesa Objeto)
         {
