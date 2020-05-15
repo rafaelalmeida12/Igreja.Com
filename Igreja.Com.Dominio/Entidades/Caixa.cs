@@ -6,8 +6,10 @@ namespace Igreja.Com.Dominio.Entidades
 {
     public class Caixa : Base
     {
-        public Oferta oferta { get; set; }
-        public Despesa despesa { get; set; }
-        public decimal Saldo { get; set; }
+        public int MovimentacaoId { get; set; }
+        public Movimentacao Movimentacao { get; set; }
+        public decimal SaldoAnterior { get; set; }
+        public decimal SaldoAtual { get; set; }
+        public bool StatusCaixa { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace Igreja.Com.Dominio.Entidades
     public class Base
     {
         public int Id { get; set; }
+       
         DateTime _dateTime;
         public DateTime dateTime
         {
