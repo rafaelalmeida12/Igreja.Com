@@ -17,22 +17,31 @@ namespace Igreja.Com.Web.Controllers
     
         private readonly InterfaceOfertaApp _interfaceOferta;
         private readonly InterfaceCaixaApp _interfaceCaixaApp;
+        private readonly InterfaceCategoriaOfertaApp _interfaceCategoriaOfertaApp;
 
         public OfertasController(InterfaceOfertaApp interfaceOferta,
-            InterfaceCaixaApp interfaceCaixaApp)
+            InterfaceCaixaApp interfaceCaixaApp,InterfaceCategoriaOfertaApp interfaceCategoriaOfertaApp)
         {
             _interfaceOferta = interfaceOferta;
             _interfaceCaixaApp = interfaceCaixaApp;
+            _interfaceCategoriaOfertaApp = interfaceCategoriaOfertaApp;
         }
         #endregion
         public IActionResult Index()
         {
             return View( _interfaceOferta.List());
         }
-       
+        public  IActionResult Lista()
+        {
+            var ofertas = _interfaceOferta.List();
+
+            return PartialView("Index",ofertas);
+
+        }
         public IActionResult Create()
         {
-            return View();
+            ViewBag.CategoriaOfertas = new SelectList(_interfaceCategoriaOfertaApp.List(),"Id", "Descricao");
+            return PartialView("Create");
         }
 
         [HttpPost]
@@ -54,22 +63,8 @@ namespace Igreja.Com.Web.Controllers
         {
             
            var caixaDoMes= _interfaceCaixaApp.BuscarSaldoDoMes(oferta.dateTime);
-        
-            if (caixaDoMes==null)
-            {
-                var caixa = new Caixa
-                {
-                    Saldo = oferta.Valor,
+
            
-                };
-                _interfaceCaixaApp.Add(caixa);
-            }
-            else
-            {
-                caixaDoMes.Saldo += oferta.Valor;
-                
-                _interfaceCaixaApp.Update(caixaDoMes);
-            }
             
         }
 

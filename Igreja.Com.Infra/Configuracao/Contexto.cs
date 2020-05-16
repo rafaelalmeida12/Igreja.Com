@@ -11,15 +11,18 @@ namespace Igreja.Com.Infra.Configuracao
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
         }
-        public DbSet<Dizimo> Dizimo { get; set; }
         public DbSet<Membro> Membro { get; set; }
         public DbSet<Cargo> Cargo { get; set; }
-        public DbSet<Culto> Culto { get; set; }
-        public DbSet<Oferta> Oferta { get; set; }
-        public DbSet<Despesa> Despesa { get; set; }
-        public DbSet<Caixa> Caixa { get; set; }
         public DbSet<Igrejas> Igrejas { get; set; }
+        public DbSet<Culto> Culto { get; set; }
+        //Financeiro
+        public DbSet<Despesa> Despesa { get; set; }
+        public DbSet<Movimentacao> Movimentacao { get; set; }
+        public DbSet<Oferta> Oferta { get; set; }
+        public DbSet<Caixa> Caixa { get; set; }
+        public DbSet<Dizimo> Dizimo { get; set; }
         public DbSet<CategoriaDespesa> categoriaDespesas { get; set; }
+        public DbSet<CategoriaOferta> categoriaOferta { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

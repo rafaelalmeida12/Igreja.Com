@@ -3,6 +3,7 @@
     BuscarAniversariantes();
     CarregarMes();
     carreseletores();
+    ObjetoSistema.ListarUsuarios();
 });
 
 function BuscarAniversariantes() {
@@ -48,5 +49,97 @@ function CarregarMes() {
             console.log(data);
         });
     })
+}
+
+//------------------------------------------------------------------------------------
+
+var ObjetoSistema = new Object();
+
+ObjetoSistema.IncluirNovousuario = function () {
+
+    $.ajax({
+        type: 'GET',
+        timeout: 50000,
+        url: '/Ofertas/create',
+        async: false,
+        success: function (jsonRetornado) {
+            $("#tabelaUsuario").html(jsonRetornado);
+        }
+    });
+}
+
+ObjetoSistema.ListarUsuarios = function () {
+    var idSistema = $("#Id").val();
+
+    var html = '<tr><td><div class="form-group"><input type="button" value="Incluir Novo Usuário" class="btn btn-primary" onclick="ObjetoSistema.IncluirNovousuario()" /></br><span id="mensagemerro" class="text-danger"></span></div></td></tr>';
+
+    $("#tabelaUsuario").html('');
+
+    $.ajax({
+        type: 'GET',
+        timeout: 50000, 
+        url: '/Ofertas/Lista',
+        async: false,
+        success: function (jsonRetornado) {
+            $("#tabelaUsuario").html(jsonRetornado);
+        }
+    });
+}
+
+
+ObjetoSistema.SalvarUsuario = function () {
+
+    var idSistema = $("#Id").val();
+    var emailUsuario = $("#EmailUsuario").val();
+
+
+    $.ajax({
+        type: 'POST',
+        timeout: 50000, //Parametrizar com objs
+        url: '/UsuarioSistemaFinanceiro/AdicionarUsuaio',
+        async: true,
+        data: {
+            "idSistema": idSistema, 'emailUsuario': emailUsuario
+        },
+        success: function (jsonRetornado) {
+
+            if (jsonRetornado.sucesso == "OK") {
+                ObjetoSistema.ListarUsuarios();
+            }
+            else {
+                $("#mensagemerro").text(jsonRetornado.sucesso);
+            }
+
+
+        }
+    });
+
+
+}
+
+ObjetoSistema.RemoverUsuario = function (emailUsuario) {
+
+    var idSistema = $("#Id").val();
+
+    $.ajax({
+        type: 'POST',
+        timeout: 50000, //Parametrizar com objs
+        url: '/UsuarioSistemaFinanceiro/RemoverUsuario',
+        async: false,
+        data: {
+            "idSistema": idSistema, 'emailUsuario': emailUsuario
+        },
+        success: function (jsonRetornado) {
+
+            if (jsonRetornado.sucesso == "OK") {
+                ObjetoSistema.ListarUsuarios();
+            }
+            else {
+                $("#mensagemerro").text(jsonRetornado.sucesso);
+            }
+
+
+        }
+    });
 }
 

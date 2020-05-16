@@ -16,10 +16,12 @@ namespace Igreja.Com.Web.Controllers
         #region Construtores
       
         private readonly InterfaceCultoApp _interfaceCulto;
+        private readonly InterfaceMembroApp _interfaceMembro;
 
-        public CultoController(InterfaceCultoApp interfaceCulto)
+        public CultoController(InterfaceCultoApp interfaceCulto,InterfaceMembroApp interfaceMembro)
         {
             _interfaceCulto = interfaceCulto;
+            _interfaceMembro = interfaceMembro;
         }
         #endregion
         // GET: Culto
@@ -37,6 +39,7 @@ namespace Igreja.Com.Web.Controllers
         // GET: Culto/Create
         public ActionResult Create()
         {
+            ViewBag.Membros = _interfaceMembro.List();
             return View();
         }
 

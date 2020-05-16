@@ -26,13 +26,31 @@ namespace Igreja.Com.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("IgrejasId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rua")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IgrejasId");
 
                     b.ToTable("Igrejas");
                 });
@@ -264,6 +282,13 @@ namespace Igreja.Com.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Igrejas", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", null)
+                        .WithMany("SubIgrejas")
+                        .HasForeignKey("IgrejasId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Web.Areas.Identity.Data.AppIdentityUser", b =>

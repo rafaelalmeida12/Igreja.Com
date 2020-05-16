@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Igreja.Com.Web.Migrations
 {
     [DbContext(typeof(AppIdentityContext))]
-    [Migration("20200506013556_inicial")]
-    partial class inicial
+    [Migration("20200515102933_inicialIdentity")]
+    partial class inicialIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,13 +28,31 @@ namespace Igreja.Com.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("IgrejasId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rua")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IgrejasId");
 
                     b.ToTable("Igrejas");
                 });
@@ -266,6 +284,13 @@ namespace Igreja.Com.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Igrejas", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Igrejas", null)
+                        .WithMany("SubIgrejas")
+                        .HasForeignKey("IgrejasId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Web.Areas.Identity.Data.AppIdentityUser", b =>
