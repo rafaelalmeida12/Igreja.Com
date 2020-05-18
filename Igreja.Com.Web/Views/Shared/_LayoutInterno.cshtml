@@ -28,61 +28,61 @@
 
 <body class="">
     <div class="wrapper ">
-       
-            <div class="sidebar" data-color="purple" data-background-color="white" data-image="~/assets/img/sidebar-1.jpg">
-                <!--
-                    Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-                    Tip 2: you can also add an image using data-image tag
-                -->
-                <div class="logo">
-                    <a asp-action="Index" class="simple-text logo-normal">
-                        Igreja Conectada
-                    </a>
-                </div>
-                <div class="sidebar-wrapper">
-                    <ul class="nav">
-                        <li class="nav-item active  ">
-                            <a class="nav-link" asp-action="Index" asp-controller="Home">
-                                <i class="material-icons">dashboard</i>
-                                <p>Página Inicial</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="Index" asp-controller="Membros">
-                                <i class="material-icons">person</i>
-                                <p>Membros</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" asp-action="Index" asp-controller="Documentos">
-                                <i class="material-icons">library_books</i>
-                                <p>Documentos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" asp-action="Index" asp-controller="Caixa">
-                                <i class="material-icons">library_books</i>
-                                <p>Caixa</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" asp-action="Index" asp-controller="Igrejas">
-                                <i class="material-icons">library_books</i>
-                                <p>Igrejas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" asp-action="Index" asp-controller="Configuracao">
-                                <i class="material-icons">brightness_high</i>
-                                <p>Configurações</p>
-                            </a>
-                        </li>
+        <div class="sidebar" data-color="purple" data-background-color="white" data-image="~/assets/img/sidebar-1.jpg">
+            <!--
+                Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-                    </ul>
-                </div>
+                Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="logo">
+                <a asp-action="Index" class="simple-text logo-normal">
+                    Igreja Conectada
+                </a>
             </div>
-        
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="nav-item active  ">
+                        <a class="nav-link" asp-action="Index" asp-controller="Home">
+                            <i class="material-icons">dashboard</i>
+                            <p>Página Inicial</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Membros">
+                            <i class="material-icons">person</i>
+                            <p>Membros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" asp-action="Index" asp-controller="Documentos">
+                            <i class="material-icons">library_books</i>
+                            <p>Documentos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" asp-action="Index" asp-controller="Caixa">
+                            <i class="material-icons">library_books</i>
+                            <p>Caixa</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" asp-action="Index" asp-controller="Igrejas">
+                            <i class="material-icons">library_books</i>
+                            <p>Igrejas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" asp-action="Index" asp-controller="Configuracao">
+                            <i class="material-icons">brightness_high</i>
+                            <p>Configurações</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
 
         <div class="main-panel">
 
@@ -126,9 +126,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                                         @*<a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="#">Editar</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Sair</a>*@
+                                            <a class="dropdown-item" href="#">Editar</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Sair</a>*@
                                         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                             <input type="submit" style="padding-left:9%;padding-top:2%;" class="nav-link btn btn-link text-dark" value="Sair">
                                         </form>
@@ -157,18 +157,18 @@
         </div>
     </div>
     <br />
-            <footer class="footer">
-                <div class="container-fluid">
-                  
-                    <div class="copyright float-right">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>, made with <i class="material-icons">favorite</i> by
-                        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-                    </div>
-                </div>
-            </footer>
+    <footer class="footer">
+        <div class="container-fluid">
+
+            <div class="copyright float-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, made with <i class="material-icons">favorite</i> by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </div>
+        </div>
+    </footer>
 
     <!--   Core JS Files   -->
     <script src="~/assets/js/core/jquery.min.js"></script>
@@ -215,6 +215,7 @@
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="~/assets/demo/demo.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/js/Entradas.js"></script>
     <script>
         $(document).ready(function () {
             $().ready(function () {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Igreja.Com.Aplicacao.InterfaceApp;
+﻿using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -14,14 +11,17 @@ namespace Igreja.Com.Web.Controllers
     public class CultoController : Controller
     {
         #region Construtores
-      
+
         private readonly InterfaceCultoApp _interfaceCulto;
         private readonly InterfaceMembroApp _interfaceMembro;
+        private readonly InterfaceCategoriaCultoApp _interfaceCategoriaCultoApp;
 
-        public CultoController(InterfaceCultoApp interfaceCulto,InterfaceMembroApp interfaceMembro)
+        public CultoController(InterfaceCultoApp interfaceCulto, InterfaceMembroApp interfaceMembro,
+            InterfaceCategoriaCultoApp interfaceCategoriaCultoApp)
         {
             _interfaceCulto = interfaceCulto;
             _interfaceMembro = interfaceMembro;
+            _interfaceCategoriaCultoApp = interfaceCategoriaCultoApp;
         }
         #endregion
         // GET: Culto
@@ -39,32 +39,31 @@ namespace Igreja.Com.Web.Controllers
         // GET: Culto/Create
         public ActionResult Create()
         {
-            ViewBag.Membros = _interfaceMembro.List();
             return View();
+        }
+
+        public ActionResult Criar()
+        {
+            ViewBag.Membros = new SelectList(_interfaceMembro.List(), "Id", "Nome");
+            ViewBag.CategoriaCulto = new SelectList(_interfaceCategoriaCultoApp.List(), "Id", "Nome");
+            return PartialView("_Create");
         }
 
         // POST: Culto/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Culto culto)
         {
-            try
-            { 
+            _interfaceCulto.Add(culto);
+            var lista = _interfaceCulto.List();
+            TempData["CultoId"] = lista[0].Id;
+            return PartialView("_Listar",lista);
 
-                //culto.dateTime = DateTime.Now;
-                _interfaceCulto.Add(culto);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Culto/Edit/5
         public ActionResult Edit(int id)
         {
-          var culto= _interfaceCulto.GetEntityById(id);
+            var culto = _interfaceCulto.GetEntityById(id);
             return View(culto);
         }
 

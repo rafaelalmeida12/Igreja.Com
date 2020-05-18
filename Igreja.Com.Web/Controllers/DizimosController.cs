@@ -39,12 +39,15 @@ namespace Igreja.Com.Web.Controllers
         // GET: Dizimos/Create
         public ActionResult Create()
         {
-            CarregarViewBags();
-            return View();
+            var dizimos = new Dizimo();
+            int id= Convert.ToInt32(TempData["CultoId"]);
+            dizimos.CultoId = id;
+
+            ViewBag.Membro = new SelectList(_interfaceMembro.GetAll(1), "Id", "Nome");
+            return PartialView("Create",dizimos);
         }
         // POST: Dizimos/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Dizimo objeto)
         {
             try

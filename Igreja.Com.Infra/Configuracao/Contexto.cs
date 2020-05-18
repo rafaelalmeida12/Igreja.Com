@@ -15,6 +15,7 @@ namespace Igreja.Com.Infra.Configuracao
         public DbSet<Cargo> Cargo { get; set; }
         public DbSet<Igrejas> Igrejas { get; set; }
         public DbSet<Culto> Culto { get; set; }
+        public DbSet<CategoriaCulto> CategoriaCulto { get; set; }
         //Financeiro
         public DbSet<Despesa> Despesa { get; set; }
         public DbSet<Movimentacao> Movimentacao { get; set; }

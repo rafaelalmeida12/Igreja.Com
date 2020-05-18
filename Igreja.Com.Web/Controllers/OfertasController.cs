@@ -45,7 +45,6 @@ namespace Igreja.Com.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Oferta oferta)
         {
             if (ModelState.IsValid)
