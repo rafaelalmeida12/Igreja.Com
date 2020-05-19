@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Igreja.Com.Web.Migrations
 {
-    public partial class inicial : Migration
+    public partial class inicialIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,30 @@ namespace Igreja.Com.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Igrejas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    Nome = table.Column<string>(nullable: false),
+                    Rua = table.Column<string>(nullable: false),
+                    Numero = table.Column<string>(nullable: false),
+                    Bairro = table.Column<string>(nullable: false),
+                    IgrejasId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Igrejas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Igrejas_Igrejas_IgrejasId",
+                        column: x => x.IgrejasId,
+                        principalTable: "Igrejas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +234,11 @@ namespace Igreja.Com.Web.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Igrejas_IgrejasId",
+                table: "Igrejas",
+                column: "IgrejasId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

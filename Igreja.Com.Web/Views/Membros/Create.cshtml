@@ -119,7 +119,13 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group bmd-form-group">
+                            <label class="control-label">Batizado</label>
+                            <select asp-for="DadosMinisteriais.TipoBatizado" asp-items="Html.GetEnumSelectList<TipoBatizado>()" class="form-control">
+                                <option selected="selected" value="">Batizado</option>
+                            </select>
+                            <span asp-validation-for="DadosMinisteriais.TipoBatizado" class="text-danger"></span>
+                        </div>
                         <textarea class="form-control" rows="1"></textarea>
 
                         <div class="row">

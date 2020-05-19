@@ -1,24 +1,43 @@
-﻿@model Igreja.Com.Dominio.Entidades.Culto
-
-<h4>Culto</h4>
-<hr />
+﻿
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-header card-header-tabs card-header-primary">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Entradas do Culto:</span>
+                        <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i> Culto
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item" onclick="ObjetoSistema.IncluirNovousuario()">
+                                <a class="nav-link" data-toggle="tab">
+                                    <i class="material-icons">code</i> Ofertas
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="nav-item"  onclick="ObjetoDizimos.CarregarFormulario()">
+                                <a class="nav-link" data-toggle="tab">
+                                    <i class="material-icons">cloud</i> Dizimos
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="card-body">
+                <div class="tab-pane active" id="profile">
+                    
+                    <table class="table">
+                        <tbody id="tabelaUsuario"></tbody>
+                    </table>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+            

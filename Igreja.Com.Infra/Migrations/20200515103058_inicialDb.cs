@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Igreja.Com.Infra.Migrations
 {
-    public partial class INICIALL : Migration
+    public partial class inicialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CategoriaCulto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    Nome = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriaCulto", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "categoriaDespesas",
                 columns: table => new
@@ -22,31 +36,27 @@ namespace Igreja.Com.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Culto",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    Nome = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Culto", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Igrejas",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     dateTime = table.Column<DateTime>(nullable: false),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(nullable: false),
+                    Rua = table.Column<string>(nullable: false),
+                    Numero = table.Column<string>(nullable: false),
+                    Bairro = table.Column<string>(nullable: false),
+                    IgrejasId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Igrejas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Igrejas_Igrejas_IgrejasId",
+                        column: x => x.IgrejasId,
+                        principalTable: "Igrejas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,58 +79,6 @@ namespace Igreja.Com.Infra.Migrations
                         name: "FK_Despesa_categoriaDespesas_categoriaDespesaId",
                         column: x => x.categoriaDespesaId,
                         principalTable: "categoriaDespesas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Oferta",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    TipoCultoId = table.Column<int>(nullable: true),
-                    Observacao = table.Column<string>(nullable: true),
-                    Valor = table.Column<decimal>(nullable: false),
-                    Saldo = table.Column<decimal>(nullable: false),
-                    DataCadastro = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Oferta", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Oferta_Culto_TipoCultoId",
-                        column: x => x.TipoCultoId,
-                        principalTable: "Culto",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Caixa",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    dateTime = table.Column<DateTime>(nullable: false),
-                    ofertaId = table.Column<int>(nullable: true),
-                    despesaId = table.Column<int>(nullable: true),
-                    Saldo = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Caixa", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Caixa_Despesa_despesaId",
-                        column: x => x.despesaId,
-                        principalTable: "Despesa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Caixa_Oferta_ofertaId",
-                        column: x => x.ofertaId,
-                        principalTable: "Oferta",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -169,8 +127,9 @@ namespace Igreja.Com.Infra.Migrations
                     Escolaridade = table.Column<int>(nullable: false),
                     Curso = table.Column<string>(nullable: true),
                     DadosMinisteriaisId = table.Column<int>(nullable: true),
-                    IgrejaId = table.Column<int>(nullable: false),
-                    IgrejasId = table.Column<int>(nullable: true)
+                    CargoId = table.Column<int>(nullable: false),
+                    IgrejaSede = table.Column<int>(nullable: true),
+                    IgrejaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,11 +141,11 @@ namespace Igreja.Com.Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Membro_Igrejas_IgrejasId",
-                        column: x => x.IgrejasId,
+                        name: "FK_Membro_Igrejas_IgrejaId",
+                        column: x => x.IgrejaId,
                         principalTable: "Igrejas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +167,54 @@ namespace Igreja.Com.Infra.Migrations
                         principalTable: "Membro",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Culto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    CategoriaCultoId = table.Column<int>(nullable: true),
+                    DirigenteId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Culto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Culto_CategoriaCulto_CategoriaCultoId",
+                        column: x => x.CategoriaCultoId,
+                        principalTable: "CategoriaCulto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Culto_Membro_DirigenteId",
+                        column: x => x.DirigenteId,
+                        principalTable: "Membro",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Endereco",
+                columns: table => new
+                {
+                    MembroId = table.Column<int>(nullable: false),
+                    Rua = table.Column<string>(nullable: true),
+                    Complemento = table.Column<string>(nullable: true),
+                    Bairro = table.Column<string>(nullable: true),
+                    Numero = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Endereco", x => x.MembroId);
+                    table.ForeignKey(
+                        name: "FK_Endereco_Membro_MembroId",
+                        column: x => x.MembroId,
+                        principalTable: "Membro",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,40 +249,99 @@ namespace Igreja.Com.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Endereco",
+                name: "Movimentacao",
                 columns: table => new
                 {
-                    MembroId = table.Column<int>(nullable: false),
-                    Rua = table.Column<string>(nullable: true),
-                    Complemento = table.Column<string>(nullable: true),
-                    Bairro = table.Column<string>(nullable: true),
-                    Numero = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    ValorTotal = table.Column<decimal>(nullable: false),
+                    categoriaDespesaId = table.Column<int>(nullable: true),
+                    CultoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Endereco", x => x.MembroId);
+                    table.PrimaryKey("PK_Movimentacao", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Endereco_Membro_MembroId",
-                        column: x => x.MembroId,
-                        principalTable: "Membro",
+                        name: "FK_Movimentacao_Culto_CultoId",
+                        column: x => x.CultoId,
+                        principalTable: "Culto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Movimentacao_categoriaDespesas_categoriaDespesaId",
+                        column: x => x.categoriaDespesaId,
+                        principalTable: "categoriaDespesas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Oferta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    TipoCultoId = table.Column<int>(nullable: true),
+                    Observacao = table.Column<string>(nullable: true),
+                    Valor = table.Column<decimal>(nullable: false),
+                    Saldo = table.Column<decimal>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Oferta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Oferta_Culto_TipoCultoId",
+                        column: x => x.TipoCultoId,
+                        principalTable: "Culto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Caixa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    dateTime = table.Column<DateTime>(nullable: false),
+                    MovimentacaoId = table.Column<int>(nullable: false),
+                    SaldoAnterior = table.Column<decimal>(nullable: false),
+                    SaldoAtual = table.Column<decimal>(nullable: false),
+                    StatusCaixa = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Caixa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Caixa_Movimentacao_MovimentacaoId",
+                        column: x => x.MovimentacaoId,
+                        principalTable: "Movimentacao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Caixa_despesaId",
+                name: "IX_Caixa_MovimentacaoId",
                 table: "Caixa",
-                column: "despesaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Caixa_ofertaId",
-                table: "Caixa",
-                column: "ofertaId");
+                column: "MovimentacaoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cargo_MembroId",
                 table: "Cargo",
                 column: "MembroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Culto_CategoriaCultoId",
+                table: "Culto",
+                column: "CategoriaCultoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Culto_DirigenteId",
+                table: "Culto",
+                column: "DirigenteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DadosMinisteriais_CargoId",
@@ -298,14 +364,29 @@ namespace Igreja.Com.Infra.Migrations
                 column: "MembroId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Igrejas_IgrejasId",
+                table: "Igrejas",
+                column: "IgrejasId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Membro_DadosMinisteriaisId",
                 table: "Membro",
                 column: "DadosMinisteriaisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Membro_IgrejasId",
+                name: "IX_Membro_IgrejaId",
                 table: "Membro",
-                column: "IgrejasId");
+                column: "IgrejaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimentacao_CultoId",
+                table: "Movimentacao",
+                column: "CultoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimentacao_categoriaDespesaId",
+                table: "Movimentacao",
+                column: "categoriaDespesaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Oferta_TipoCultoId",
@@ -331,22 +412,28 @@ namespace Igreja.Com.Infra.Migrations
                 name: "Caixa");
 
             migrationBuilder.DropTable(
+                name: "Despesa");
+
+            migrationBuilder.DropTable(
                 name: "Dizimo");
 
             migrationBuilder.DropTable(
                 name: "Endereco");
 
             migrationBuilder.DropTable(
-                name: "Despesa");
+                name: "Oferta");
 
             migrationBuilder.DropTable(
-                name: "Oferta");
+                name: "Movimentacao");
+
+            migrationBuilder.DropTable(
+                name: "Culto");
 
             migrationBuilder.DropTable(
                 name: "categoriaDespesas");
 
             migrationBuilder.DropTable(
-                name: "Culto");
+                name: "CategoriaCulto");
 
             migrationBuilder.DropTable(
                 name: "Membro");

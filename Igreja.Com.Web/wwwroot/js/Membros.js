@@ -40,13 +40,14 @@ function carreseletores() {
     })
 }
 
-function CarregarMes() {
-    $(".nav-link").on("click", function () {
-        var text = $(this).text();
+//function CarregarMes() {
+//    $(".nav-link").on("click", function () {
+//        var text = $(this).text();
 
-        $.get("http://localhost:5000/Membros/TESTE", { mes: text }, function (data) {
-            console.log(data);
-        });
-    })
-}
+//        $.get("http://localhost:5000/Membros/TESTE", { mes: text }, function (data) {
+//            console.log(data);
+//        });
+//    })
+//}
+
 
