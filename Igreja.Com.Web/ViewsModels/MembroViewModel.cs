@@ -2,6 +2,7 @@
 using Igreja.Com.Dominio.Entidades.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,8 @@ namespace Igreja.Com.Web.ViewsModels
 {
     public class MembroViewModel
     {
+
+        [DisplayName("Nome Completo")]
         public string NomeCompleto { get; set; }
         public TipoEstadoCivel EstadoCivil { get; set; }
         public string Telefone { get; set; }
