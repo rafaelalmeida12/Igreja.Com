@@ -15,7 +15,7 @@ namespace Igreja.Com.Web.Controllers
     public class DocumentosController : Controller
     {
         #region Construtores
-      
+
         private readonly InterfaceMembroApp _interfaceMembro;
 
         public DocumentosController(InterfaceMembroApp interfaceMembro)
@@ -42,17 +42,26 @@ namespace Igreja.Com.Web.Controllers
                 var titulodetalhes = new PdfSharpCore.Drawing.XFont("Arial", 14, PdfSharpCore.Drawing.XFontStyle.Bold);
                 var fonteDetalhesDescricao = new PdfSharpCore.Drawing.XFont("Arial", 7);
 
-                var logo = @"C:\Users\Rafael\source\repos\Igreja.Com\Igreja.Com.Web\wwwroot\Imagens\banner.png";
+                var logo = @"C:\Users\Rafael\source\repos\Igreja.Com\Igreja.Com.Web\wwwroot\Imagens\logo.jpg";
 
                 var qtdPaginas = doc.PageCount;
                 textFormatter.DrawString(qtdPaginas.ToString(), new PdfSharpCore.Drawing.XFont("Arial", 10), corFonte, new PdfSharpCore.Drawing.XRect(578, 825, page.Width, page.Height));
 
                 // Impressão do LogoTipo
                 XImage imagem = XImage.FromFile(logo);
-                graphics.DrawImage(imagem, 40, 5, 150, 50);
+                graphics.DrawImage(imagem, 20, 10, 100, 50);
 
-            
-                int posicao = 75;
+                textFormatter.DrawString("Igreja Evangelica Assembleia de Deus", fonteDescricao, corFonte, new PdfSharpCore.Drawing.XRect(225, 15, 150, 150));
+                textFormatter.DrawString("Avenida Leopoldo de Matos", fonteDescricao, corFonte, new PdfSharpCore.Drawing.XRect(250, 35, 150, 150));
+                textFormatter.DrawString("Guajará-Mirim RO", fonteDescricao, corFonte, new PdfSharpCore.Drawing.XRect(265, 55, 150, 150));
+
+                var tituloDetalhes = new PdfSharpCore.Drawing.Layout.XTextFormatter(graphics);
+                tituloDetalhes.Alignment = PdfSharpCore.Drawing.Layout.XParagraphAlignment.Center;
+                tituloDetalhes.DrawString("Ficha Cadastro de Membro ", titulodetalhes, corFonte, new PdfSharpCore.Drawing.XRect(0, 90, page.Width, page.Height));
+
+                textFormatter.DrawString("O senhor é meu pastor e nada me faltará", new PdfSharpCore.Drawing.XFont("Arial", 10), corFonte, new PdfSharpCore.Drawing.XRect(225, 825, page.Width, page.Height));
+
+                int posicao = 130;
                 var membro = new MembroPDF();
 
                 foreach (var propertyInfo in membro.GetType().GetProperties())
@@ -60,7 +69,7 @@ namespace Igreja.Com.Web.Controllers
                     textFormatter.DrawString(propertyInfo.Name, fonteDescricao, corFonte, new PdfSharpCore.Drawing.XRect(20, posicao, page.Width, page.Height));
                     textFormatter.DrawString("___________________________________", fonteOrganzacao, corFonte, new PdfSharpCore.Drawing.XRect(85, posicao, page.Width, page.Height));
 
-                    posicao = posicao+ 20;
+                    posicao = posicao + 25;
                 }
 
 
@@ -87,73 +96,73 @@ namespace Igreja.Com.Web.Controllers
             return View();
         }
 
-    // GET: Documentos/Create
-    public ActionResult Create()
-    {
-        return View();
-    }
-
-    // POST: Documentos/Create
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(IFormCollection collection)
-    {
-        try
-        {
-            // TODO: Add insert logic here
-
-            return RedirectToAction(nameof(Index));
-        }
-        catch
+        // GET: Documentos/Create
+        public ActionResult Create()
         {
             return View();
         }
-    }
 
-    // GET: Documentos/Edit/5
-    public ActionResult Edit(int id)
-    {
-        return View();
-    }
-
-    // POST: Documentos/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Edit(int id, IFormCollection collection)
-    {
-        try
+        // POST: Documentos/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
         {
-            // TODO: Add update logic here
+            try
+            {
+                // TODO: Add insert logic here
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
-        catch
-        {
-            return View();
-        }
-    }
 
-    // GET: Documentos/Delete/5
-    public ActionResult Delete(int id)
-    {
-        return View();
-    }
-
-    // POST: Documentos/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Delete(int id, IFormCollection collection)
-    {
-        try
-        {
-            // TODO: Add delete logic here
-
-            return RedirectToAction(nameof(Index));
-        }
-        catch
+        // GET: Documentos/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
+
+        // POST: Documentos/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Documentos/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Documentos/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
-}
 }
