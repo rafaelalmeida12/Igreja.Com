@@ -70,7 +70,7 @@ namespace Igreja.Com.Infra.Repositorio
             using (var banco = new Contexto(optionsBuilder))
             {
                 banco.Set<T>().Update(Objeto);
-                banco.SaveChangesAsync();
+                banco.SaveChanges();
             }
         }
     }

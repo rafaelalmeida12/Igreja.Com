@@ -110,6 +110,8 @@ namespace Igreja.Com.Web.Controllers
         // GET: Membros/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.Igrejas = new SelectList(_interfaceIgrejasApp.List(), "Id", "Nome");
+
             var membro = _interfaceMembro.BuscarPorId(id);
             return View(membro);
         }
@@ -122,10 +124,11 @@ namespace Igreja.Com.Web.Controllers
             {
                 // TODO: Add update logic here
                 _interfaceMembro.Update(membro);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            catch
+            catch(ArgumentNullException ex)
             {
+                var respota = ex;
                 return View();
             }
         }
@@ -133,18 +136,19 @@ namespace Igreja.Com.Web.Controllers
         // GET: Membros/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var membro = _interfaceMembro.BuscarPorId(id);
+            return View(membro);
         }
 
         // POST: Membros/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id,Membro membro)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                var membros = _interfaceMembro.BuscarPorId(id);
+                _interfaceMembro.Delete(membros);
                 return RedirectToAction(nameof(Index));
             }
             catch
