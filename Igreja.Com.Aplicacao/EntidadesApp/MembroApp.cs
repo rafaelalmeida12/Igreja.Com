@@ -78,6 +78,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             return _interfaceMembro.BuscarAniversariantes(dateTime);
         }
 
+        public IList<Membro> BuscarPorNome(string nome)
+        {
+            return _interfaceMembro.BuscarPorNome(nome);
+        }
+
 
         #endregion
     }

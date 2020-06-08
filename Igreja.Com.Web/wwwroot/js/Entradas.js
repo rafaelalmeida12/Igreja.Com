@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     ObjetoIgreja.CarregarFormulario();
+    ObjetoDizimos.autocomplete();
 });
 
 var ObjetoSistema = new Object();
@@ -22,7 +23,7 @@ ObjetoSistema.IncluirNovousuario = function () {
 }
 
 ObjetoSistema.ListarUsuarios = function () {
-   
+
     $("#tabelaUsuario").html('');
 
     $.ajax({
@@ -54,7 +55,7 @@ ObjetoSistema.SalvarUsuario = function () {
         async: true,
         data: { oferta: ofertas },
         success: function (jsonRetornado) {
-                ObjetoSistema.ListarUsuarios();
+            ObjetoSistema.ListarUsuarios();
         }
     });
 }
@@ -151,4 +152,25 @@ ObjetoDizimos.SalvarCulto = function () {
             $("#tabelaUsuario").html(jsonRetornado);
         }
     });
+}
+
+
+
+ObjetoDizimos.autocomplete = function () {
+    var membro = $("#MembroId").val();
+
+    if (membro.length >= 3) {
+        $.ajax({
+            type: 'POST',
+            url: '/Membros/Teste',
+            data: {
+                nome: membro
+            },
+            success: function (data) {
+                $.each(data) {
+                    $("#MembroId").append(data.nome);
+                };
+            }
+        });
+    }
 }
