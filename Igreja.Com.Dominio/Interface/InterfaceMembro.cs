@@ -12,5 +12,6 @@ namespace Igreja.Com.Dominio.Interface
         Membro BuscarPorId(int Id);
         IList<Membro> BuscarAniversariantes(DateTime dateTime);
         int BuscarTotalMembros(int IgrejaId);
+        IList<Membro> BuscarPorNome(string nome);
     }
 }

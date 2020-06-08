@@ -57,6 +57,10 @@ namespace Igreja.Com.Web.Controllers
         {
             return View();
         }
+        public IActionResult Relatorio()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

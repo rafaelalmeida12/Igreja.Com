@@ -70,5 +70,16 @@ namespace Igreja.Com.Infra.Repositorio
 
             }
         }
+        
+        public IList<Membro> BuscarPorNome(string nome)
+        {
+            using (var busca = new Contexto(dbContextOptions))
+            {
+                var resultado = busca.Membro
+                    .Where(c => c.Nome.ToLower().Contains(nome.ToLower()));
+
+                return resultado.ToList();
+            }
+        }
     }
 }

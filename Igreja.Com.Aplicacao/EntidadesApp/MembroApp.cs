@@ -27,7 +27,7 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
 
         public void Delete(Membro Objeto)
         {
-            throw new NotImplementedException();
+            _interfaceMembro.Delete(Objeto);
         }
 
         public int BuscarTotalMembros(int IgrejaId)
@@ -76,6 +76,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         public IList<Membro> BuscarAniversariantes(DateTime dateTime)
         {
             return _interfaceMembro.BuscarAniversariantes(dateTime);
+        }
+
+        public IList<Membro> BuscarPorNome(string nome)
+        {
+            return _interfaceMembro.BuscarPorNome(nome);
         }
 
 
