@@ -21,6 +21,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             _InterfaceCargo.Add(Objeto);
         }
 
+        public int AddRetorno(Cargo Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Cargo Objeto)
         {
             throw new NotImplementedException();

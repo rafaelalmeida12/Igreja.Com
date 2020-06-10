@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Igreja.Com.Infra.Repositorio
 {
-    public class RepositorioCategoriaCulto:RepositorioBase<CategoriaCulto>,InterfaceCategoriaCulto
+    public class RepositorioMovimentacao : RepositorioBase<Movimentacao>, InterfaceMovimentacao
     {
     }
 }

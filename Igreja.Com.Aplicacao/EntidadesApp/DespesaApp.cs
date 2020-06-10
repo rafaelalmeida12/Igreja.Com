@@ -21,6 +21,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             _interfaceDespesa.Add(Objeto);
         }
 
+        public int AddRetorno(Despesa Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public decimal CalculaSaldo()
         {
             return _interfaceDespesa.CalculaSaldo();

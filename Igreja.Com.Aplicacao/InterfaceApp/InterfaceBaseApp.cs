@@ -10,6 +10,7 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
         void Update(T Objeto);
         void Delete(T Objeto);
         T GetEntityById(int Id);
+        int AddRetorno(T Objeto);
         List<T> List();
         //JsonResult ListAsync();
         

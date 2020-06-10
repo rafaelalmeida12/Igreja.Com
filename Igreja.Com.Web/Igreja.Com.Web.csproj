@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Igreja.Com.Aplicacao\Igreja.Com.Aplicacao.csproj" />
     <ProjectReference Include="..\Igreja.Com.Infra\Igreja.Com.Infra.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Culto\" />
+  </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Igreja.Com.Aplicacao.InterfaceApp
 {
-    public interface InterfaceCategoriaCultoApp : InterfaceBaseApp<CategoriaCulto>
+   public interface InterfaceMovimentacaoApp:InterfaceBaseApp<Movimentacao>
     {
     }
 }

@@ -83,6 +83,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             return _interfaceMembro.BuscarPorNome(nome);
         }
 
+        public int AddRetorno(Membro Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
     }

@@ -53,5 +53,9 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             throw new System.NotImplementedException();
         }
 
+        public int AddRetorno(Caixa Objeto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

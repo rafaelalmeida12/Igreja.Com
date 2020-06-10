@@ -17,6 +17,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
            _InterfaceCategoriaOfertaApp.Add(Objeto);
         }
 
+        public int AddRetorno(Dominio.Entidades.CategoriaOferta Objeto)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Delete(Dominio.Entidades.CategoriaOferta Objeto)
         {
             _InterfaceCategoriaOfertaApp.Delete(Objeto);

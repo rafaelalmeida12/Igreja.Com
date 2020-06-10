@@ -4,14 +4,16 @@ using Igreja.Com.Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Igreja.Com.Infra.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20200610190259_cultos")]
+    partial class cultos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -373,28 +375,23 @@ namespace Igreja.Com.Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Id_Movimentacoes")
+                    b.Property<int>("CultoId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Pessoa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TipoDespesa")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("categoriaDespesaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CultoId");
+
+                    b.HasIndex("categoriaDespesaId");
 
                     b.ToTable("Movimentacao");
                 });
@@ -508,6 +505,19 @@ namespace Igreja.Com.Infra.Migrations
                         .HasForeignKey("IgrejaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Movimentacao", b =>
+                {
+                    b.HasOne("Igreja.Com.Dominio.Entidades.Culto", "Culto")
+                        .WithMany()
+                        .HasForeignKey("CultoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaDespesa", "categoriaDespesa")
+                        .WithMany()
+                        .HasForeignKey("categoriaDespesaId");
                 });
 
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Oferta", b =>

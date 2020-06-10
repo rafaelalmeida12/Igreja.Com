@@ -21,6 +21,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             _interfaceCulto.Add(Objeto);
         }
 
+        public int AddRetorno(Culto Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Culto Objeto)
         {
             throw new NotImplementedException();

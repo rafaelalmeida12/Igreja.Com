@@ -20,6 +20,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             throw new NotImplementedException();
         }
 
+        public int AddRetorno(CategoriaDespesa Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(CategoriaDespesa Objeto)
         {
             throw new NotImplementedException();

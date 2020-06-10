@@ -20,6 +20,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             _interfaceIgrejas.Add(Objeto);
         }
 
+        public int AddRetorno(Igrejas Objeto)
+        {
+            throw new NotImplementedException();
+        }
+
         public IList<Igrejas> BuscarCedes()
         {
             return _interfaceIgrejas.BuscarCedes();

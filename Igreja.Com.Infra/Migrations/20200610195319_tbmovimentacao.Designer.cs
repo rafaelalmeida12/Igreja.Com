@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Igreja.Com.Infra.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200516131417_categoriaCulto")]
-    partial class categoriaCulto
+    [Migration("20200610195319_tbmovimentacao")]
+    partial class tbmovimentacao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,24 +73,6 @@ namespace Igreja.Com.Infra.Migrations
                     b.ToTable("Cargo");
                 });
 
-            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.CategoriaCulto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("dateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoriaCulto");
-                });
-
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.CategoriaDespesa", b =>
                 {
                     b.Property<int>("Id")
@@ -131,20 +113,13 @@ namespace Igreja.Com.Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoriaCultoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MembroId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("descricao")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriaCultoId");
-
-                    b.HasIndex("MembroId");
 
                     b.ToTable("Culto");
                 });
@@ -400,23 +375,28 @@ namespace Igreja.Com.Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CultoId")
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id_Movimentacoes")
                         .HasColumnType("int");
+
+                    b.Property<string>("Pessoa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoDespesa")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("categoriaDespesaId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("dateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CultoId");
-
-                    b.HasIndex("categoriaDespesaId");
 
                     b.ToTable("Movimentacao");
                 });
@@ -474,17 +454,6 @@ namespace Igreja.Com.Infra.Migrations
                         .HasForeignKey("MembroId");
                 });
 
-            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Culto", b =>
-                {
-                    b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaCulto", "CategoriaCulto")
-                        .WithMany()
-                        .HasForeignKey("CategoriaCultoId");
-
-                    b.HasOne("Igreja.Com.Dominio.Entidades.Membro", "Dirigente")
-                        .WithMany()
-                        .HasForeignKey("MembroId");
-                });
-
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.DadosMinisteriais", b =>
                 {
                     b.HasOne("Igreja.Com.Dominio.Entidades.Cargo", "Cargo")
@@ -502,7 +471,7 @@ namespace Igreja.Com.Infra.Migrations
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Dizimo", b =>
                 {
                     b.HasOne("Igreja.Com.Dominio.Entidades.Culto", "Culto")
-                        .WithMany("Dizimos")
+                        .WithMany()
                         .HasForeignKey("CultoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -543,19 +512,6 @@ namespace Igreja.Com.Infra.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Movimentacao", b =>
-                {
-                    b.HasOne("Igreja.Com.Dominio.Entidades.Culto", "Culto")
-                        .WithMany()
-                        .HasForeignKey("CultoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaDespesa", "categoriaDespesa")
-                        .WithMany()
-                        .HasForeignKey("categoriaDespesaId");
-                });
-
             modelBuilder.Entity("Igreja.Com.Dominio.Entidades.Oferta", b =>
                 {
                     b.HasOne("Igreja.Com.Dominio.Entidades.CategoriaOferta", "CategoriaOferta")
@@ -563,7 +519,7 @@ namespace Igreja.Com.Infra.Migrations
                         .HasForeignKey("CategoriaOfertaId");
 
                     b.HasOne("Igreja.Com.Dominio.Entidades.Culto", "TipoCulto")
-                        .WithMany("Ofertas")
+                        .WithMany()
                         .HasForeignKey("TipoCultoId");
                 });
 #pragma warning restore 612, 618

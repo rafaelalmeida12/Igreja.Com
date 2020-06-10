@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Igreja.Com.Dominio.Interface
 {
-    public interface InterfaceCategoriaCulto:InterfaceBase<CategoriaCulto>
+    public interface InterfaceMovimentacao : InterfaceBase<Movimentacao>
     {
     }
 }

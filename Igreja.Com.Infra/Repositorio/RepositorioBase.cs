@@ -21,8 +21,17 @@ namespace Igreja.Com.Infra.Repositorio
         {
             using (var data = new Contexto(optionsBuilder))
             {
-                 data.Set<T>().Add(Objeto);
-                 data.SaveChanges();
+                data.Set<T>().Add(Objeto);
+                data.SaveChanges();
+            }
+        }
+
+        public int AddRetorno(T Objeto)
+        {
+            using (var data = new Contexto(optionsBuilder))
+            {
+                var dados = data.Set<T>().Add(Objeto);
+                return data.SaveChanges();
             }
         }
 

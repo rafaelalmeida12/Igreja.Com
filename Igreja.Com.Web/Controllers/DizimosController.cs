@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace Igreja.Com.Web.Controllers
@@ -16,12 +17,15 @@ namespace Igreja.Com.Web.Controllers
         private readonly InterfaceDizimoApp _interfaceDizimo;
         private readonly InterfaceMembroApp _interfaceMembro;
         private readonly InterfaceCultoApp _interfaceCulto;
+        private readonly InterfaceMovimentacaoApp _interfaceMovimentacao;
 
-        public DizimosController(InterfaceDizimoApp interfaceDizimo,InterfaceMembroApp interfaceMembro, InterfaceCultoApp interfaceCulto)
+        public DizimosController(InterfaceDizimoApp interfaceDizimo,InterfaceMembroApp interfaceMembro, 
+            InterfaceCultoApp interfaceCulto, InterfaceMovimentacaoApp interfaceMovimentacao)
         {
            _interfaceDizimo = interfaceDizimo;
            _interfaceMembro = interfaceMembro;
            _interfaceCulto = interfaceCulto;
+            _interfaceMovimentacao = interfaceMovimentacao;
         }
         #endregion
         // GET: Dizimos
@@ -39,12 +43,10 @@ namespace Igreja.Com.Web.Controllers
         // GET: Dizimos/Create
         public ActionResult Create()
         {
-            var dizimos = new Dizimo();
-            int id= Convert.ToInt32(TempData["CultoId"]);
-            dizimos.CultoId = id;
-
+          
+            ViewBag.cultos= new SelectList(_interfaceCulto.List(),"Id", "descricao");
             ViewBag.Membro = new SelectList(_interfaceMembro.GetAll(1), "Id", "Nome");
-            return PartialView("Create",dizimos);
+            return View();
         }
         // POST: Dizimos/Create
         [HttpPost]
@@ -53,14 +55,19 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 //  objeto.dateTime = DateTime.Now;
-                _interfaceDizimo.Add(objeto);
-
+             var ID= _interfaceDizimo.AddRetorno(objeto);
+                //AdicionarMovimentacao(valor,Id,usuarioNome);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+        }
+
+        private void AdicionarMovimentacao()
+        {
+            //_interfaceMovimentacao.Add();
         }
 
         // GET: Dizimos/Edit/5

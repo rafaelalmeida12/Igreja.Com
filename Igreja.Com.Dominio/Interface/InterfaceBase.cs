@@ -9,6 +9,7 @@ namespace Igreja.Com.Dominio.Interface
         void Add(T Objeto);
         void Update(T Objeto);
         void Delete(T Objeto);
+        int AddRetorno(T Objeto);
         T GetEntityById(int Id);
         List<T> List();
     }

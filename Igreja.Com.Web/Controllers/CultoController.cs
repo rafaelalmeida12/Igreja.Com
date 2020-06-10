@@ -14,14 +14,12 @@ namespace Igreja.Com.Web.Controllers
 
         private readonly InterfaceCultoApp _interfaceCulto;
         private readonly InterfaceMembroApp _interfaceMembro;
-        private readonly InterfaceCategoriaCultoApp _interfaceCategoriaCultoApp;
-
-        public CultoController(InterfaceCultoApp interfaceCulto, InterfaceMembroApp interfaceMembro,
-            InterfaceCategoriaCultoApp interfaceCategoriaCultoApp)
+  
+        public CultoController(InterfaceCultoApp interfaceCulto, InterfaceMembroApp interfaceMembro)
         {
             _interfaceCulto = interfaceCulto;
             _interfaceMembro = interfaceMembro;
-            _interfaceCategoriaCultoApp = interfaceCategoriaCultoApp;
+          
         }
         #endregion
         // GET: Culto
@@ -45,7 +43,7 @@ namespace Igreja.Com.Web.Controllers
         public ActionResult Criar()
         {
             ViewBag.Membros = new SelectList(_interfaceMembro.List(), "Id", "Nome");
-            ViewBag.CategoriaCulto = new SelectList(_interfaceCategoriaCultoApp.List(), "Id", "Nome");
+            ViewBag.culto = new SelectList(_interfaceCulto.List(), "Id", "Nome");
             return PartialView("_Create");
         }
 
