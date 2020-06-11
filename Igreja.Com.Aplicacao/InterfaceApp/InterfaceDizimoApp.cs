@@ -8,5 +8,7 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
     public interface InterfaceDizimoApp : InterfaceBaseApp<Dizimo>
     {
         List<Dizimo> ListDizimo();
+        int AddRetorno(Dizimo Objeto);
+        int AddRetornoDizimo(Dizimo Objeto);
     }
 }

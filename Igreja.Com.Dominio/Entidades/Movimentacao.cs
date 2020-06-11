@@ -7,7 +7,6 @@ namespace Igreja.Com.Dominio.Entidades
 {
     public class Movimentacao:Base
     {
-        public decimal ValorTotal { get; set; }
         public TipoDespesa TipoDespesa { get; set; }
         public int Id_Movimentacoes { get; set; }
         public DateTime Data { get; set; }

@@ -1,11 +1,14 @@
 ﻿using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
+using Igreja.Com.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using System;
+using System.Threading.Tasks;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -18,14 +21,17 @@ namespace Igreja.Com.Web.Controllers
         private readonly InterfaceMembroApp _interfaceMembro;
         private readonly InterfaceCultoApp _interfaceCulto;
         private readonly InterfaceMovimentacaoApp _interfaceMovimentacao;
+        private readonly UserManager<AppIdentityUser> _userManager;
+
 
         public DizimosController(InterfaceDizimoApp interfaceDizimo,InterfaceMembroApp interfaceMembro, 
-            InterfaceCultoApp interfaceCulto, InterfaceMovimentacaoApp interfaceMovimentacao)
+            InterfaceCultoApp interfaceCulto, InterfaceMovimentacaoApp interfaceMovimentacao, UserManager<AppIdentityUser> userManager)
         {
            _interfaceDizimo = interfaceDizimo;
            _interfaceMembro = interfaceMembro;
            _interfaceCulto = interfaceCulto;
             _interfaceMovimentacao = interfaceMovimentacao;
+            _userManager = userManager;
         }
         #endregion
         // GET: Dizimos
@@ -55,8 +61,9 @@ namespace Igreja.Com.Web.Controllers
             try
             {
                 //  objeto.dateTime = DateTime.Now;
-             var ID= _interfaceDizimo.AddRetorno(objeto);
-                //AdicionarMovimentacao(valor,Id,usuarioNome);
+                var IdDizimo = _interfaceDizimo.AddRetornoDizimo(objeto);
+              string user= _userManager.GetUserName(this.User);
+                AdicionarMovimentacao(objeto.Valor,IdDizimo, user);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -65,10 +72,22 @@ namespace Igreja.Com.Web.Controllers
             }
         }
 
-        private void AdicionarMovimentacao()
+        private void AdicionarMovimentacao(decimal valor, int idDizimo, string user)
         {
-            //_interfaceMovimentacao.Add();
+            Movimentacao movi = new Movimentacao
+            {
+                Valor = valor,
+                Id_Movimentacoes = idDizimo,
+                Pessoa = user,
+                Data=DateTime.Now,
+                TipoDespesa=0
+
+            };
+
+            _interfaceMovimentacao.Add(movi);
         }
+
+
 
         // GET: Dizimos/Edit/5
         public ActionResult Edit(int id)

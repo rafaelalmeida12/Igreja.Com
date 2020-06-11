@@ -8,5 +8,6 @@ namespace Igreja.Com.Dominio.Interface
     public interface InterfaceDizimo:InterfaceBase<Dizimo>
     {
         List<Dizimo> ListDizimo();
+        int AddRetornoDizimo(Dizimo objeto);
     }
 }

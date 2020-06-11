@@ -7,5 +7,7 @@ namespace Igreja.Com.Dominio.Interface
 {
     public interface InterfaceMovimentacao : InterfaceBase<Movimentacao>
     {
+        decimal BuscarEntradasDoMes(int month);
+        decimal BuscarSaidaDoMes(int month);
     }
 }

@@ -28,10 +28,11 @@ namespace Igreja.Com.Infra.Repositorio
 
         public int AddRetorno(T Objeto)
         {
+
             using (var data = new Contexto(optionsBuilder))
             {
-                var dados = data.Set<T>().Add(Objeto);
-                return data.SaveChanges();
+               data.Set<T>().Add(Objeto);
+              return data.SaveChanges();
             }
         }
 

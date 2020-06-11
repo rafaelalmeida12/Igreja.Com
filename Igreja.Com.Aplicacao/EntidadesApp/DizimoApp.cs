@@ -27,6 +27,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             return dados;
         }
 
+        public int AddRetornoDizimo(Dizimo Objeto)
+        {
+            return _interfaceDizimo.AddRetornoDizimo(Objeto);
+        }
+
         public void Delete(Dizimo Objeto)
         {
             throw new NotImplementedException();

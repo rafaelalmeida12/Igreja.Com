@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Igreja.Com.Aplicacao.InterfaceApp
 {
-   public interface InterfaceMovimentacaoApp:InterfaceBaseApp<Movimentacao>
+    public interface InterfaceMovimentacaoApp : InterfaceBaseApp<Movimentacao>
     {
+        decimal BuscarEntradasDoMes(int month);
+        decimal BuscarSaidaDoMes(int month);
     }
 }

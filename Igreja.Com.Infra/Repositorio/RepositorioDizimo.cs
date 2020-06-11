@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Igreja.Com.Infra.Repositorio
 {
-    public class RepositorioDizimo:RepositorioBase<Dizimo>,InterfaceDizimo
+    public class RepositorioDizimo : RepositorioBase<Dizimo>, InterfaceDizimo
     {
         private readonly DbContextOptions<Contexto> dbContextOptions;
 
@@ -24,9 +24,24 @@ namespace Igreja.Com.Infra.Repositorio
             {
                 return data.Set<Dizimo>()
                     .AsNoTracking()
-                    .Include(c=>c.Membro)
+                    .Include(c => c.Membro)
                     .ToList();
             }
         }
+
+        public int AddRetornoDizimo(Dizimo Objeto)
+        {
+
+            using (var data = new Contexto(dbContextOptions))
+            {
+                data.Dizimo.Add(Objeto);
+                data.SaveChanges();
+
+                int id = Objeto.Id;
+                return id;
+            }
+        }
+
+
     }
 }

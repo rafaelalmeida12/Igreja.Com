@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Igreja.Com.Aplicacao.InterfaceApp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace Igreja.Com.Web.Controllers
 {
@@ -12,24 +13,21 @@ namespace Igreja.Com.Web.Controllers
     {
 
         #region Construtores
-        private readonly InterfaceOfertaApp _interfaceOfertaApp;
-        private readonly InterfaceDespesaApp _interfaceDespesaApp;
-        private readonly InterfaceCaixaApp _interfaceCaixaApp;
-        public CaixaController(InterfaceOfertaApp interfaceOfertaApp,
-            InterfaceDespesaApp interfaceDespesaApp, InterfaceCaixaApp interfaceCaixaApp)
+
+        private readonly InterfaceMovimentacaoApp _interfaceMovimentacaoApp;
+
+        public CaixaController(InterfaceMovimentacaoApp interfaceMovimentacaoApp)
         {
-            _interfaceOfertaApp = interfaceOfertaApp;
-            _interfaceDespesaApp = interfaceDespesaApp;
-            _interfaceCaixaApp = interfaceCaixaApp;
+            _interfaceMovimentacaoApp = interfaceMovimentacaoApp;
         }
         #endregion
 
         public ActionResult Index()
         {
-            DateTime date = DateTime.Now;
-            ViewBag.Saldo = _interfaceOfertaApp.CalculaSaldo();
-            ViewBag.Despesa = _interfaceDespesaApp.CalculaSaldo();
-            ViewBag.Despesa = _interfaceCaixaApp.BuscarSaldoDoMes(date);
+            var mes = DateTime.Now;
+            ViewBag.Entradas= _interfaceMovimentacaoApp.BuscarEntradasDoMes(mes.Month);
+            ViewBag.Saidas= _interfaceMovimentacaoApp.BuscarSaidaDoMes(mes.Month);
+
             return View();
         }
 

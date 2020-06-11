@@ -10,6 +10,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
     public class MovimentacaoApp : InterfaceMovimentacaoApp
     {
         InterfaceMovimentacao _interfaceMovimentacao;
+
+        public MovimentacaoApp(InterfaceMovimentacao interfaceMovimentacao)
+        {
+            _interfaceMovimentacao = interfaceMovimentacao;
+        }
         public void Add(Movimentacao Objeto)
         {
             _interfaceMovimentacao.Add(Objeto);
@@ -18,6 +23,16 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         public int AddRetorno(Movimentacao Objeto)
         {
             throw new NotImplementedException();
+        }
+
+        public decimal BuscarEntradasDoMes(int month)
+        {
+            return _interfaceMovimentacao.BuscarEntradasDoMes(month);
+        }
+
+        public decimal BuscarSaidaDoMes(int month)
+        {
+            return _interfaceMovimentacao.BuscarSaidaDoMes(month);
         }
 
         public void Delete(Movimentacao Objeto)
