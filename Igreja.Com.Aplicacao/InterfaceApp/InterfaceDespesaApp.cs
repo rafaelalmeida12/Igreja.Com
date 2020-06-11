@@ -8,5 +8,6 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
     public interface InterfaceDespesaApp : InterfaceBaseApp<Despesa>
     {
         decimal CalculaSaldo();
+        int AddRetornoDespesa(Despesa Objeto);
     }
 }

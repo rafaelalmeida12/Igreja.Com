@@ -31,7 +31,7 @@ namespace Igreja.Com.Infra.Repositorio
         {
             using (var busca = new Contexto(dbContextOptions))
             {
-                var dados = busca.Movimentacao.Where(c => c.Data.Month == month && c.TipoDespesa.Equals(1)).Sum(c => c.Valor);
+                var dados = busca.Movimentacao.Where(c => c.Data.Month == month && c.TipoDespesa==TipoDespesa.saida).Sum(c => c.Valor);
                 return dados;
             }
         }

@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Igreja.Com.Aplicacao.InterfaceApp;
 using Igreja.Com.Dominio.Entidades;
+using Igreja.Com.Dominio.Entidades.Enum;
+using Igreja.Com.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Igreja.Com.Web.Controllers
@@ -12,17 +15,16 @@ namespace Igreja.Com.Web.Controllers
     public class DespesaController : Controller
     {
         #region Construtores
-       
         private readonly InterfaceDespesaApp _interfaceDespesaApp;
-        private readonly InterfaceOfertaApp _interfaceOfertaApp;
-        private readonly InterfaceCaixaApp _interfaceCaixaApp;
+        private readonly InterfaceMovimentacaoApp _interfaceMovimentacao;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
-        public DespesaController(InterfaceDespesaApp interfaceDespesaApp,
-            InterfaceOfertaApp interfaceOfertaApp, InterfaceCaixaApp interfaceCaixaApp)
+        public DespesaController(InterfaceDespesaApp interfaceDespesaApp, UserManager<AppIdentityUser> userManager,
+            InterfaceMovimentacaoApp interfaceMovimentacao)
         {
             _interfaceDespesaApp = interfaceDespesaApp;
-            _interfaceOfertaApp = interfaceOfertaApp;
-            _interfaceCaixaApp = interfaceCaixaApp;
+            _userManager = userManager;
+            _interfaceMovimentacao = interfaceMovimentacao;
         }
         #endregion
         // GET: Despesa
@@ -51,15 +53,29 @@ namespace Igreja.Com.Web.Controllers
         {
             try
             {
-                var resultado = _interfaceCaixaApp.BuscarSaldoDoMes(despesa.dateTime);
-                
-                _interfaceDespesaApp.Add(despesa);
+                int id = _interfaceDespesaApp.AddRetornoDespesa(despesa);
+                string user = _userManager.GetUserName(this.User);
+                AdicionarMovimentacao(despesa.Valor, id, user);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+        }
+
+        private void AdicionarMovimentacao(decimal valor, int idDizimo, string user)
+        {
+            Movimentacao movi = new Movimentacao
+            {
+                Valor = valor,
+                Id_Movimentacoes = idDizimo,
+                Pessoa = user,
+                Data = DateTime.Now,
+                TipoDespesa = TipoDespesa.saida
+
+            };
+            _interfaceMovimentacao.Add(movi);
         }
 
         // GET: Despesa/Edit/5

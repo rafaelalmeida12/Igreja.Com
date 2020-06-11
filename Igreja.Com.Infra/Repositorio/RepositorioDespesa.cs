@@ -16,6 +16,19 @@ namespace Igreja.Com.Infra.Repositorio
         {
             dbContextOptions = new DbContextOptions<Contexto>();
         }
+
+        public int AddRetornoDespesa(Despesa Objeto)
+        {
+            using (var data = new Contexto(dbContextOptions))
+            {
+                data.Despesa.Add(Objeto);
+                data.SaveChanges();
+
+                int id = Objeto.Id;
+                return id;
+            }
+        }
+
         public decimal CalculaSaldo()
         {
             using (var busca = new Contexto(dbContextOptions))
@@ -25,3 +38,4 @@ namespace Igreja.Com.Infra.Repositorio
         }
     }
 }
+ 
