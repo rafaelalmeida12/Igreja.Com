@@ -56,7 +56,7 @@ namespace Igreja.Com.Web.Controllers
                 int id = _interfaceDespesaApp.AddRetornoDespesa(despesa);
                 string user = _userManager.GetUserName(this.User);
                 AdicionarMovimentacao(despesa.Valor, id, user);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Caixa");
             }
             catch
             {

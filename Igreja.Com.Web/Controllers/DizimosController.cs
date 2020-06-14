@@ -64,7 +64,7 @@ namespace Igreja.Com.Web.Controllers
                 var IdDizimo = _interfaceDizimo.AddRetornoDizimo(objeto);
               string user= _userManager.GetUserName(this.User);
                 AdicionarMovimentacao(objeto.Valor,IdDizimo, user);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Caixa");
             }
             catch
             {

@@ -9,5 +9,6 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
     {
         decimal CalculaSaldo();
         decimal DescontarDespesa(decimal valor);
+        int AddRetornoOferta(Oferta objeto);
     }
 }

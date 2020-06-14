@@ -9,5 +9,6 @@ namespace Igreja.Com.Dominio.Interface
     {
         decimal CalculaSaldo();
         decimal DescontarDespesa(decimal valor);
+        int AddRetornoOferta(Oferta objeto);
     }
 }

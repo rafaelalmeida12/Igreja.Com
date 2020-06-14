@@ -8,63 +8,79 @@ using Microsoft.EntityFrameworkCore;
 using Igreja.Com.Dominio.Entidades;
 using Igreja.Com.Infra.Configuracao;
 using Igreja.Com.Aplicacao.InterfaceApp;
+using Microsoft.AspNetCore.Identity;
+using Igreja.Com.Web.Areas.Identity.Data;
 
 namespace Igreja.Com.Web.Controllers
 {
     public class OfertasController : Controller
     {
         #region Construtores
-    
+
         private readonly InterfaceOfertaApp _interfaceOferta;
-        private readonly InterfaceCaixaApp _interfaceCaixaApp;
         private readonly InterfaceCategoriaOfertaApp _interfaceCategoriaOfertaApp;
+        private readonly InterfaceCultoApp _interfaceCulto;
+        private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly InterfaceMovimentacaoApp _interfaceMovimentacao;
 
         public OfertasController(InterfaceOfertaApp interfaceOferta,
-            InterfaceCaixaApp interfaceCaixaApp,InterfaceCategoriaOfertaApp interfaceCategoriaOfertaApp)
+            InterfaceCategoriaOfertaApp interfaceCategoriaOfertaApp, InterfaceCultoApp interfaceCulto, UserManager<AppIdentityUser> userManager,
+            InterfaceMovimentacaoApp interfaceMovimentacao)
         {
             _interfaceOferta = interfaceOferta;
-            _interfaceCaixaApp = interfaceCaixaApp;
             _interfaceCategoriaOfertaApp = interfaceCategoriaOfertaApp;
+            _interfaceCulto = interfaceCulto;
+            _userManager = userManager;
+            _interfaceMovimentacao = interfaceMovimentacao;
         }
         #endregion
         public IActionResult Index()
         {
-            return View( _interfaceOferta.List());
+            return View(_interfaceOferta.List());
         }
-        public  IActionResult Lista()
+        public IActionResult Lista()
         {
             var ofertas = _interfaceOferta.List();
 
-            return PartialView("Index",ofertas);
+            return PartialView("Index", ofertas);
 
         }
         public IActionResult Create()
         {
-            ViewBag.CategoriaOfertas = new SelectList(_interfaceCategoriaOfertaApp.List(),"Id", "Descricao");
-            return PartialView("Create");
+            ViewBag.CategoriaOfertas = new SelectList(_interfaceCategoriaOfertaApp.List(), "Id", "Descricao");
+            ViewBag.cultos = new SelectList(_interfaceCulto.List(), "Id", "descricao");
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Oferta oferta)
+        public IActionResult Create(Oferta oferta)
         {
-            if (ModelState.IsValid)
+            try
             {
-                AdicionarValorCaixa(oferta);
-
-                _interfaceOferta.Add(oferta);
-
-                return RedirectToAction(nameof(Index));
+                var IdOferta = _interfaceOferta.AddRetornoOferta(oferta);
+                string user = _userManager.GetUserName(this.User);
+                AdicionarMovimentacao(oferta.Valor, IdOferta, user);
+                return RedirectToAction("Index", "Caixa");
             }
-            return View(oferta);
+            catch
+            {
+              return  View(oferta);
+            }
         }
 
-        private void AdicionarValorCaixa(Oferta oferta)
+        private void AdicionarMovimentacao(decimal valor, int idDizimo, string user)
         {
-            
-           var caixaDoMes= _interfaceCaixaApp.BuscarSaldoDoMes(oferta.dateTime);
+            Movimentacao movi = new Movimentacao
+            {
+                Valor = valor,
+                Id_Movimentacoes = idDizimo,
+                Pessoa = user,
+                Data = DateTime.Now,
+                TipoDespesa = 0
 
-           
-            
+            };
+
+            _interfaceMovimentacao.Add(movi);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -74,7 +90,7 @@ namespace Igreja.Com.Web.Controllers
                 return NotFound();
             }
 
-            var oferta =  _interfaceOferta.GetEntityById(id.Value);
+            var oferta = _interfaceOferta.GetEntityById(id.Value);
             if (oferta == null)
             {
                 return NotFound();
@@ -84,7 +100,7 @@ namespace Igreja.Com.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,Oferta oferta)
+        public async Task<IActionResult> Edit(int id, Oferta oferta)
         {
             if (id != oferta.Id)
             {
@@ -128,7 +144,7 @@ namespace Igreja.Com.Web.Controllers
 
             return View(oferta);
         }
-   
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -34,5 +34,18 @@ namespace Igreja.Com.Infra.Repositorio
                 return novoResultado;
             }
         }
+
+        public int AddRetornoOferta(Oferta Objeto)
+        {
+
+            using (var data = new Contexto(dbContextOptions))
+            {
+                data.Oferta.Add(Objeto);
+                data.SaveChanges();
+
+                int id = Objeto.Id;
+                return id;
+            }
+        }
     }
 }

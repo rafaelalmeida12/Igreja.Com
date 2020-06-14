@@ -1,34 +1,53 @@
-﻿<div class="row">
+﻿<h1>Entradas</h1>
+<div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
-        <a asp-action="Create" asp-controller="Culto">
+        <a asp-action="Create" asp-controller="Dizimos">
             <div class="card card-stats">
                 <div class="card-header card-header-success card-header-icon">
                     <div class="card-icon">
                         <i class="material-icons">add</i>
                     </div>
                     <h3 class="card-title">
-                        Entrada
+                        Dizimos
                     </h3>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6">
-        <a asp-action="Index" asp-controller="Despesa">
+        <a asp-action="Create" asp-controller="Ofertas">
             <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
+                <div class="card-header card-header-success card-header-icon">
                     <div class="card-icon">
-                        <i class="material-icons">remove</i>
+                        <i class="material-icons">add</i>
                     </div>
                     <h3 class="card-title">
-                        Saida
+                        Ofertas
                     </h3>
                 </div>
             </div>
         </a>
     </div>
 </div>
-<h1>Entradas</h1><br />
-    <h2>@ViewBag.Entradas</h2>
-<h1>Saida</h1><br />
-    <h3>@ViewBag.Saidas</h3>
+<h1>Saida</h1>
+<div class="row">
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <a asp-action="Index" asp-controller="Despesa">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">remove</i>
+                </div>
+                <h3 class="card-title">
+                    Despesas
+                </h3>
+            </div>
+        </div>
+    </a>
+</div>
+</div>
+<div class="row">
+    <h2>Entrada: @ViewBag.Entradas</h2>
+    <h2>Saida: @ViewBag.Saidas</h2>
+</div>
+<iframe width="1250" height="750" src="https://app.powerbi.com/view?r=eyJrIjoiZDE0MTRjOTctODJiMC00ODA5LTg3ZDktOGJlODU3ZTJkMzNhIiwidCI6IjZiNjk3NDEwLWVhODMtNGVhZi05OThhLTgwM2YzM2MzMThkMiJ9" frameborder="0" allowFullScreen="true"></iframe>

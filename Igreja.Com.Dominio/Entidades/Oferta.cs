@@ -6,7 +6,8 @@ namespace Igreja.Com.Dominio.Entidades
 {
     public class Oferta : Base
     {
-        public Culto TipoCulto { get; set; }
+        public int CultoId { get; set; }
+        public Culto Culto { get; set; }
         public CategoriaOferta CategoriaOferta { get; set; }
         public string Observacao { get; set; }
         public decimal Valor { get; set; }

@@ -24,6 +24,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             throw new NotImplementedException();
         }
 
+        public int AddRetornoOferta(Oferta objeto)
+        {
+            return _interfaceOferta.AddRetornoOferta(objeto);
+        }
+
         public decimal CalculaSaldo()
         {
             return _interfaceOferta.CalculaSaldo();
