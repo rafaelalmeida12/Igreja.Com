@@ -35,5 +35,24 @@ namespace Igreja.Com.Infra.Repositorio
                 return dados;
             }
         }
+
+        public IList<Movimentacao> BuscarEntreDatas(DateTime data1,DateTime data2)
+        {
+            using (var busca = new Contexto(dbContextOptions))
+            {
+                var dados = busca.Movimentacao.Where(c => c.Data.Date >= data1.Date && c.Data.Date <= data2.Date).ToList();
+                    return dados;
+            }
+        }
+
+        public IList<Movimentacao> ListarMes(int month)
+        {
+            using (var busca = new Contexto(dbContextOptions))
+            {
+                var dados = busca.Movimentacao.Where(c => c.Data.Month == month).ToList();
+                return dados;
+            }
+
+        }
     }
 }

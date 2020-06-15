@@ -1,4 +1,7 @@
-﻿<h1>Entradas</h1>
+﻿
+<h4>Dia:@DateTime.Now</h4>
+
+<h4>Entradas</h4>
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
         <a asp-action="Create" asp-controller="Dizimos">
@@ -29,25 +32,43 @@
         </a>
     </div>
 </div>
-<h1>Saida</h1>
+<h4>Saida</h4>
 <div class="row">
-<div class="col-lg-3 col-md-6 col-sm-6">
-    <a asp-action="Index" asp-controller="Despesa">
-        <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">remove</i>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <a asp-action="Index" asp-controller="Despesa">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">remove</i>
+                    </div>
+                    <h3 class="card-title">
+                        Despesas
+                    </h3>
                 </div>
-                <h3 class="card-title">
-                    Despesas
-                </h3>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 </div>
+<h4>Movimentações</h4>
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <a asp-action="Index" asp-controller="Movimentacao">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">remove</i>
+                    </div>
+                    <h3 class="card-title">
+                        Movimentações
+                    </h3>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 <div class="row">
-    <h2>Entrada: @ViewBag.Entradas</h2>
+    <h2>Entrada: @ViewBag.Entradas</h2> <br />
     <h2>Saida: @ViewBag.Saidas</h2>
 </div>
+
 <iframe width="1250" height="750" src="https://app.powerbi.com/view?r=eyJrIjoiZDE0MTRjOTctODJiMC00ODA5LTg3ZDktOGJlODU3ZTJkMzNhIiwidCI6IjZiNjk3NDEwLWVhODMtNGVhZi05OThhLTgwM2YzM2MzMThkMiJ9" frameborder="0" allowFullScreen="true"></iframe>

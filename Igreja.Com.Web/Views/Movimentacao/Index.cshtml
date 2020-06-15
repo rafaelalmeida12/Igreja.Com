@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Igreja.Com.Dominio.Entidades.Movimentacao>
+
+@{
+    decimal valor = 0;
+
+    <h4>Dia:@DateTime.Now</h4>
+    <div id="tabelaMovimentacao">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">Data</label>
+                <input id="data1" type="date" class="form-control" />
+            </div> <br />
+            <div class="form-group">
+                <label class="control-label">Entre</label>
+                <input id="data2" type="date" class="form-control" />
+            </div><br />
+            <div>
+                <input type="button" value="Pesquisar" onclick="PesquisarDatas()" />
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoDespesa)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pessoa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Valor)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.dateTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoDespesa)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pessoa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Valor)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                    valor = valor + item.Valor;
+
+                }
+            </tbody>
+        </table>
+        <h3>Total : @valor</h3>
+    </div>

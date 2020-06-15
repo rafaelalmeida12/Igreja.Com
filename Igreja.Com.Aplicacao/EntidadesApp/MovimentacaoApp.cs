@@ -30,6 +30,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
             return _interfaceMovimentacao.BuscarEntradasDoMes(month);
         }
 
+        public IList<Movimentacao> BuscarEntreDatas(DateTime data1, DateTime data2)
+        {
+            return _interfaceMovimentacao.BuscarEntreDatas(data1, data2);
+        }
+
         public decimal BuscarSaidaDoMes(int month)
         {
             return _interfaceMovimentacao.BuscarSaidaDoMes(month);
@@ -48,6 +53,11 @@ namespace Igreja.Com.Aplicacao.EntidadesApp
         public List<Movimentacao> List()
         {
             return _interfaceMovimentacao.List();
+        }
+
+        public IList<Movimentacao> ListarMes(int month)
+        {
+            return _interfaceMovimentacao.ListarMes(month);
         }
 
         public void Update(Movimentacao Objeto)

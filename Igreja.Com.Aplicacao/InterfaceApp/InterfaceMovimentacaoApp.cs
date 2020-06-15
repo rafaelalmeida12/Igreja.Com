@@ -9,5 +9,7 @@ namespace Igreja.Com.Aplicacao.InterfaceApp
     {
         decimal BuscarEntradasDoMes(int month);
         decimal BuscarSaidaDoMes(int month);
+        IList<Movimentacao> BuscarEntreDatas(DateTime data1, DateTime data2);
+        IList<Movimentacao> ListarMes(int month);
     }
 }
