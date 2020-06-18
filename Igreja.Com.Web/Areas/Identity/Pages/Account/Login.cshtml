@@ -3,56 +3,57 @@
 
 @{
     ViewData["Title"] = "Log in";
+    
 }
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">Login</h4>
-                    </div>
-                    <div class="card-body">
-                        <form id="account" method="post">
-                            <hr />
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <div class="form-group bmd-form-group">
-                                <label asp-for="Input.Email"></label>
-                                <input asp-for="Input.Email" class="form-control" />
-                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Login</h4>
+                </div>
+                <div class="card-body">
+                    <form id="account" method="post">
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group bmd-form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
                             </div>
-                            <div class="form-group bmd-form-group">
-                                <label asp-for="Input.Password"></label>
-                                <input asp-for="Input.Password" class="form-control" />
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-group bmd-form-group">
-                                <div class="checkbox">
-                                    <label asp-for="Input.RememberMe">
-                                        <input asp-for="Input.RememberMe" />
-                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group bmd-form-group">
-                                <button type="submit" class="btn btn-primary">Log in</button>
-                            </div>
-                            <div class="form-group bmd-form-group">
-                                <p>
-                                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                                </p>
-                                <p>
-                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                                </p>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                        <div class="form-group bmd-form-group">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Esqueceu a senha ?</a>
+                            </p>
+                            <p>
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register novo usuário</a>
+                            </p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
-        @section Scripts {
-            <partial name="_ValidationScriptsPartial" />
-        }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
